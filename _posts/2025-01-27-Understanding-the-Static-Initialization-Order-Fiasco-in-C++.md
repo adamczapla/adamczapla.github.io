@@ -15,19 +15,37 @@ Global and static variables in C++ are usually initialized at compile time if th
 
 ### `file1.cpp`
 
-code
+```c++
+auto sum(int a, int b) {
+  return a + b;
+}
+
+int sum_result = sum(5, 5);
+```
 
 The global variable `sum_result` is set to 0 (*`zero initialized`) because the `sum` function is not `constexpr`. Compile-time initialization is therefore not possible.
 
 ### `file2.cpp`
 
-code
+```c++
+extern int sum_result;
+int static_val = sum_result;
+```
 
 The global variable `static_val` is also set to 0 (*`zero initialized`), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
 
 ### `main.cpp`
 
-code
+```c++
+extern int sum_result;
+extern int static_val;
+
+auto main() -> int {
+  std::cout << "sum_result = " << sum_result << '\n'; // output: 10
+  std::cout << "static_val = " << static_val << '\n'; // output: 10 oder 0
+  return 0;
+}
+```
 
 The **linker** decides at link time which **translation unit** it processes first.
 - If it processes `file1.cpp` first, `sum_result` is initialized to 10, and `static_val` is also set to 10.
@@ -42,19 +60,37 @@ This behavior leads to a discrepancy between the values of `sum_result` and `sta
 
 ### `file1.cpp`
 
-code
+```c++
+constexpr auto sum(int a, int b) {
+  return a + b;
+}
+
+constinit int sum_result = sum(5, 5);
+```
 
 Here, `sum_result` is initialized at compile time because the `sum` function is `constexpr`, and the values (5 and 5) are known at compile time. To enforce compile-time initialization, the `constinit` keyword **is required**.
 
 ### `file2.cpp`
 
-code
+```c++
+extern constinit int sum_result; 
+int static_val = sum_result;
+```
 
 Because `sum_result` is defined in another translation unit, `static_val` is zero-initialized since the value of `sum_result` is not available during the compile step.
 
 ### `main.cpp`
 
-code
+```c++
+extern constinit int sum_result;
+extern int static_val;
+
+auto main() -> int {
+	std::cout << "sum_result = " << sum_result << '\n'; // output: 10
+	std::cout << "static_val = " << static_val << '\n'; // output: 10
+	return 0;
+}
+```
 
 Now, it no longer matters which translation unit the linker processes first. `static_val` **will always** be initialized with the value 10 because `sum_result` **is guaranteed** to be initialized at compile time.
 
@@ -70,22 +106,10 @@ Although compilers often perform compile-time initialization without these keywo
 
 Understanding the ***Static Initialization Order Fiasco*** not only helps avoid potential bugs but also highlights the **importance of explicit initialization** in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
-Footnote
-* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
-- For arithmetic types (e.g., int, float), it is 0 or 0.0.
-- For pointers, it is nullptr.
-- For bool, it is false.
-- For characters (char), it is '\0'.
-- For user-defined types (e.g., classes/structs), all members are recursively zero-initialized.*
-
-
-
-```c++
-constexpr auto is_constant_evaluated(int val) {
-  if (std::is_constant_evaluated()) {
-    return consteval_func(val);
-  } else {
-    std::cout << "is_constant_evaluated==false\n"; return 0;
-  }
-}
-```
+### Footnote
+\* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
+- For arithmetic types (e.g., `int`, `float`), it is `0` or `0.0`.
+- For pointers, it is `nullptr`.
+- For `bool`, it is `false`.
+- For characters (`char`), it is `'\0'`.
+- For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.*
