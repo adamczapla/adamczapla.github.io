@@ -12,7 +12,7 @@ The **Static Initialization Order Fiasco** is a critical issue in C++ programmin
 
 ## The Problem
 
-**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to `0` (\*`zero-initialized`). 
+**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to `0` ([`zero-initialized`][id1]). 
 
 Let’s look at an example to understand this issue better.
 
@@ -108,6 +108,13 @@ To guarantee initialization of **global** or **static** variables at compile tim
 Although compilers often perform compile-time initialization without these keywords, this behavior is **not guaranteed** unless the keywords are **explicitly** used.
 
 Understanding the **Static Initialization Order Fiasco** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
+
+[id1]: ## "\*`Zero-initialization` depends on the data type and sets the value to a `null value` defined by the type:
+-> For arithmetic types (e.g., `int`, `float`), it is `0` or `0.0`.
+-> For pointers, it is `nullptr`.
+-> For `bool`, it is `false`.
+-> For characters (`char`), it is `'\0'`.
+-> For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.\*"
 
 ### Footnote
 \* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
