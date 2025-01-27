@@ -80,7 +80,7 @@ extern constinit int sum_result;
 int static_val = sum_result;
 ```
 
-Because `sum_result` is defined in another translation unit, `static_val` is \*`zero-initialized`[^1] since the value of `sum_result` is not available during the compile step.
+Because `sum_result` is defined in another translation unit, `static_val` is `zero-initialized`[^1] since the value of `sum_result` is not available during the compile step.
 
 ### `main.cpp`
 
