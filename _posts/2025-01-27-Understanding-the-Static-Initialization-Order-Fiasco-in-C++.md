@@ -11,7 +11,9 @@ The Static Initialization Order Fiasco is a critical issue in C++ programming th
 
 ## The Problem
 
-Global and static variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to 0 (\*`zero initialized`). Let’s look at an example to understand this issue better.
+Global and static variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to 0 (\*`zero initialized`). 
+
+Let’s look at an example to understand this issue better.
 
 ### `file1.cpp`
 
@@ -23,7 +25,7 @@ auto sum(int a, int b) {
 int sum_result = sum(5, 5);
 ```
 
-The global variable `sum_result` is set to 0 (\*`zero initialized`) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later in the document.
+The global variable `sum_result` is set to 0 (\*`zero initialized`) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later.
 
 ### `file2.cpp`
 
@@ -68,7 +70,7 @@ constexpr auto sum(int a, int b) {
 constinit int sum_result = sum(5, 5);
 ```
 
-Here, `sum_result` is initialized at compile time because the `sum` function is `constexpr`, and the values (5 and 5) are known at compile time. To enforce compile-time initialization, the `constinit` keyword **is required**.
+Here, `sum_result` is initialized at compile time because the `sum` function is `constexpr`, and the values (`5` and `5`) are known at compile time. To enforce compile-time initialization, the `constinit` keyword is **required**.
 
 ### `file2.cpp`
 
@@ -92,7 +94,7 @@ auto main() -> int {
 }
 ```
 
-Now, it no longer matters which translation unit the linker processes first. `static_val` **will always** be initialized with the value 10 because `sum_result` **is guaranteed** to be initialized at compile time.
+Now, it no longer matters which translation unit the linker processes first. `static_val` will **always** be initialized with the value 10 because `sum_result` is **guaranteed** to be initialized at compile time.
 
 ## Conclusion
 
@@ -102,9 +104,9 @@ To guarantee initialization of global or static variables at compile time:
 
 `2.` The variable must be marked with either the `constexpr` or `constinit` keyword
 
-Although compilers often perform compile-time initialization without these keywords, this behavior **is not guaranteed** unless the keywords are **explicitly** used.
+Although compilers often perform compile-time initialization without these keywords, this behavior is **not guaranteed** unless the keywords are **explicitly** used.
 
-Understanding the ***Static Initialization Order Fiasco*** not only helps avoid potential bugs but also highlights the importance of **explicit initialization** in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
+Understanding the ***Static Initialization Order Fiasco*** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
 ### Footnote
 \* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
