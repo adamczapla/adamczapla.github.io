@@ -11,7 +11,7 @@ The Static Initialization Order Fiasco is a critical issue in C++ programming th
 
 ## The Problem
 
-Global and static variables in C++ are usually initialized at compile time if their values are known at that time. If the value for initializing a variable is not known at compile time, the variable is set to 0 (*`zero initialized`). However, this initialization is **not always** guaranteed. Let’s look at an example to understand this issue better. 
+Global and static variables in C++ are usually initialized at compile time if their values are known at that time. If the value for initializing a variable is not known at compile time, the variable is set to 0 (\*`zero initialized`). However, this initialization **is not always** guaranteed. Let’s look at an example to understand this issue better. 
 
 ### `file1.cpp`
 
@@ -23,7 +23,7 @@ auto sum(int a, int b) {
 int sum_result = sum(5, 5);
 ```
 
-The global variable `sum_result` is set to 0 (*`zero initialized`) because the `sum` function is not `constexpr`. Compile-time initialization is therefore not possible.
+The global variable `sum_result` is set to 0 (\*`zero initialized`) because the `sum` function is not `constexpr`. Compile-time initialization is therefore not possible.
 
 ### `file2.cpp`
 
@@ -32,7 +32,7 @@ extern int sum_result;
 int static_val = sum_result;
 ```
 
-The global variable `static_val` is also set to 0 (*`zero initialized`), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
+The global variable `static_val` is also set to 0 (\*`zero initialized`), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
 
 ### `main.cpp`
 
@@ -104,7 +104,7 @@ To guarantee initialization of global or static variables at compile time:
 
 Although compilers often perform compile-time initialization without these keywords, this behavior **is not guaranteed** unless the keywords are **explicitly** used.
 
-Understanding the ***Static Initialization Order Fiasco*** not only helps avoid potential bugs but also highlights the **importance of explicit initialization** in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
+Understanding the ***Static Initialization Order Fiasco*** not only helps avoid potential bugs but also highlights the importance of **explicit initialization** in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
 ### Footnote
 \* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
@@ -112,4 +112,4 @@ Understanding the ***Static Initialization Order Fiasco*** not only helps avoid 
 - For pointers, it is `nullptr`.
 - For `bool`, it is `false`.
 - For characters (`char`), it is `'\0'`.
-- For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.*
+- For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.\*
