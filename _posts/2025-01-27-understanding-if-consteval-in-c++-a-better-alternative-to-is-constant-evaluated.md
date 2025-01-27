@@ -1,9 +1,9 @@
 ---
-title: "Understanding if consteval in C++: A Better Alternative to std::is_constant_evaluated()"
+title: "Understanding 'if consteval' in C++: A Better Alternative to std::is_constant_evaluated()"
 date: 27-01-2025 12:00:00 +0100
 categories: [Programming, C++]
 tags: [c++, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions]
-description: "A detailed exploration of 'if consteval' in C++, its advantages over std::is_constant_evaluated(), and how it improves compile-time evaluation handling."
+description: "A detailed exploration of 'if consteval' and its advantages over std::is_constant_evaluated() in C++."
 ---
 
 ## Introduction
@@ -69,6 +69,7 @@ Unlike an `if` clause, `if consteval` is a compile-time construct, just like `if
 
 `std::is_constant_evaluated()` has its uses for runtime-dependent logic, but it falls short when working with `consteval` functions. The introduction of `if consteval` in C++ provides a cleaner and safer way to handle compile-time evaluation, ensuring that the compiler can confidently differentiate between branches.
 
-By understanding the nuances of these constructs, developers can write more robust and maintainable C++ code.
+> By understanding the nuances of these constructs, developers can write more robust and maintainable C++ code.
+{: .prompt-info }
 
 
