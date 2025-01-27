@@ -43,7 +43,8 @@ The compiler reports an error during **static analysis**, even if the function i
 
 Instead, the compiler treats the call `consteval_func(val)` in the `if` clause as if it were outside the clause entirely. This means the call is always analyzed, regardless of whether it will actually execute or not. Consequently, the compiler raises an error because `val` is not `constexpr`.
 
-This behavior leads to the conclusion that calling a `consteval` function from a `constexpr` function with a non-`constexpr` argument is **always** invalid.
+> This behavior leads to the conclusion that calling a `consteval` function from a `constexpr` function with a non-`constexpr` argument is **always** invalid.
+{: .prompt-info }
 
 ## Enter `if consteval`
 
