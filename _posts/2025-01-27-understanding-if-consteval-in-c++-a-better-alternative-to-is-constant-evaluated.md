@@ -16,13 +16,24 @@ In this post, we’ll explore how if consteval solves these issues, and why it i
 
 Consider the following `constexpr` function:
 
-code
+```c++
+constexpr auto is_constant_evaluated(int val) {
+  if (std::is_constant_evaluated()) {
+    return consteval_func(val);
+  } else {
+    std::cout << "is_constant_evaluated==false\n";
+    return 0;
+  }
+}
+```
 
 The compiler produces an error at the line (**`3`**), because the parameter `val` is not `constexpr`. A `consteval` function like `consteval_func()` can only be called with `constexpr` arguments.
 
 Logically, this seems unnecessary since the `if (std::is_constant_evaluated())` branch will only execute at compile-time. And even though `val` isn’t `constexpr`, the `constexpr` function would have been invoked with a `constexpr` argument if executed at compile-time. For example:
 
-code
+```c++
+constexpr auto val = [] consteval { return is_constant_evaluated(42); }();
+```
 
 ## Why does it still not work?
 
@@ -36,7 +47,16 @@ This behavior leads to the conclusion that calling a `consteval` function from a
 
 Here’s how `if consteval` resolves the issue:
 
-code
+```c++
+constexpr auto is_constant_evaluated(int val) {
+  if consteval {
+    return consteval_func(val);
+  } else {
+    std::cout << "is_constant_evaluated==false\n";
+    return 0;
+  }
+}
+```
 
 With `if consteval`, the compiler makes the decision about which branch to execute during **static analysis**. This means:
 
