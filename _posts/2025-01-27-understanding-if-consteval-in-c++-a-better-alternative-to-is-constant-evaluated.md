@@ -51,6 +51,8 @@ Instead, the compiler treats the call `consteval_func(val)` in the `if` clause a
 Here’s how `if consteval` resolves the issue:
 
 ```c++
+consteval auto consteval_func(int val) { return val; }
+
 constexpr auto is_constant_evaluated(int val) {
   if consteval {
     return consteval_func(val);
