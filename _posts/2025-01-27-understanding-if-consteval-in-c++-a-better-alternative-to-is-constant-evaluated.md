@@ -17,6 +17,8 @@ In this post, we’ll explore how `if consteval` solves these issues, and why it
 Consider the following `constexpr` function:
 
 ```c++
+consteval auto consteval_func(int val) { return val; }
+
 constexpr auto is_constant_evaluated(int val) {
   if (std::is_constant_evaluated()) {
     return consteval_func(val);
