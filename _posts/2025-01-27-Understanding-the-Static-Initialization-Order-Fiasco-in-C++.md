@@ -12,7 +12,7 @@ The **Static Initialization Order Fiasco** is a critical issue in C++ programmin
 
 ## The Problem
 
-**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to `0` ([`zero-initialized`][id1]). 
+**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to `0` (`zero-initialized`[^1]). 
 
 Let’s look at an example to understand this issue better.
 
@@ -26,7 +26,7 @@ auto sum(int a, int b) {
 int sum_result = sum(5, 5);
 ```
 
-The global variable `sum_result` is set to `0` (\*`zero-initialized`) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later.
+The global variable `sum_result` is set to `0` (`zero-initialized`[^1]) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later.
 
 ### `file2.cpp`
 
@@ -35,7 +35,7 @@ extern int sum_result;
 int static_val = sum_result;
 ```
 
-The global variable `static_val` is also set to `0` (\*`zero-initialized`), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
+The global variable `static_val` is also set to `0` (`zero-initialized`[^1]), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
 
 ### `main.cpp`
 
@@ -109,17 +109,11 @@ Although compilers often perform compile-time initialization without these keywo
 
 Understanding the **Static Initialization Order Fiasco** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
-[id1]: ## "\*`Zero-initialization` depends on the data type and sets the value to a `null value` defined by the type:
--> For arithmetic types (e.g., `int`, `float`), it is `0` or `0.0`.
--> For pointers, it is `nullptr`.
--> For `bool`, it is `false`.
--> For characters (`char`), it is `'\0'`.
--> For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.\*"
-
-### Footnote
-\* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
-- For arithmetic types (e.g., `int`, `float`), it is `0` or `0.0`.
-- For pointers, it is `nullptr`.
-- For `bool`, it is `false`.
-- For characters (`char`), it is `'\0'`.
-- For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.\*
+[^1]: ### Footnote 
+    `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
+    
+      - For arithmetic types (e.g., `int`, `float`), it is `0` or `0.0`.
+      - For pointers, it is `nullptr`.
+      - For `bool`, it is `false`.
+      - For characters (`char`), it is `'\0'`.
+      - For user-defined types (e.g., `classes/structs`), all members are recursively `zero-initialized`.\*
