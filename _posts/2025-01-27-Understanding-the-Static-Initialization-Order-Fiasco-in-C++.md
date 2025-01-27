@@ -2,7 +2,7 @@
 title: Understanding the Static Initialization Order Fiasco in C++
 categories: [Programming, C++]
 tags: [c++, static-initialization, initialization-order, constexpr, constinit, global-variables, static-variables, compile-time, linker, zero-initialization]
-description: A concise exploration of the Static Initialization Order Fiasco in C++
+description: A concise exploration of the Static Initialization Order Fiasco in C++, including its causes, examples, and solutions for developers.
 ---
 
 ## Introduction
