@@ -11,7 +11,7 @@ The **Static Initialization Order Fiasco** is a critical issue in C++ programmin
 
 ## The Problem
 
-**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to 0 (\*`zero-initialized`). 
+**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to `0` (\*`zero-initialized`). 
 
 Let’s look at an example to understand this issue better.
 
@@ -43,8 +43,8 @@ extern int sum_result;
 extern int static_val;
 
 auto main() -> int {
-  std::cout << "sum_result = " << sum_result << '\n'; // output: `10`
-  std::cout << "static_val = " << static_val << '\n'; // output: `10` oder `0`
+  std::cout << "sum_result = " << sum_result << '\n'; // output: 10
+  std::cout << "static_val = " << static_val << '\n'; // output: 10 oder 0
   return 0;
 }
 ```
@@ -88,9 +88,9 @@ extern constinit int sum_result;
 extern int static_val;
 
 auto main() -> int {
-	std::cout << "sum_result = " << sum_result << '\n'; // output: `10`
-	std::cout << "static_val = " << static_val << '\n'; // output: `10`
-	return 0;
+  std::cout << "sum_result = " << sum_result << '\n'; // output: 10
+  std::cout << "static_val = " << static_val << '\n'; // output: 10
+  return 0;
 }
 ```
 
@@ -106,7 +106,7 @@ To guarantee initialization of **global** or **static** variables at compile tim
 
 Although compilers often perform compile-time initialization without these keywords, this behavior is **not guaranteed** unless the keywords are **explicitly** used.
 
-Understanding the ***Static Initialization Order Fiasco*** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
+Understanding the **Static Initialization Order Fiasco** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
 ### Footnote
 \* `Zero-initialization` depends on the data type and sets the value to a "null value" defined by the type:
