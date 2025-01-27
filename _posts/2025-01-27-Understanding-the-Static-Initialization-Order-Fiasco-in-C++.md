@@ -11,7 +11,7 @@ The Static Initialization Order Fiasco is a critical issue in C++ programming th
 
 ## The Problem
 
-Global and static variables in C++ are usually initialized at compile time if their values are known at that time. If the value for initializing a variable is not known at compile time, the variable is set to 0 (\*`zero initialized`). However, this initialization **is not always** guaranteed. Let’s look at an example to understand this issue better. 
+Global and static variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to 0 (\*`zero initialized`). Let’s look at an example to understand this issue better.
 
 ### `file1.cpp`
 
@@ -23,7 +23,7 @@ auto sum(int a, int b) {
 int sum_result = sum(5, 5);
 ```
 
-The global variable `sum_result` is set to 0 (\*`zero initialized`) because the `sum` function is not `constexpr`. Compile-time initialization is therefore not possible.
+The global variable `sum_result` is set to 0 (\*`zero initialized`) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later in the document.
 
 ### `file2.cpp`
 
