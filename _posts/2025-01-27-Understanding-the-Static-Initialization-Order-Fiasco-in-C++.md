@@ -7,11 +7,11 @@ description: A concise exploration of the Static Initialization Order Fiasco in 
 
 ## Introduction
 
-The Static Initialization Order Fiasco is a critical issue in C++ programming that can lead to unpredictable behavior in global and static variables. For C++ developers, understanding this phenomenon is essential. This document explores the problem, illustrates it with examples, and provides solutions.
+The **Static Initialization Order Fiasco** is a critical issue in C++ programming that can lead to unpredictable behavior in global and static variables. For C++ developers, understanding this phenomenon is essential. This post explores the problem, illustrates it with examples, and provides solutions.
 
 ## The Problem
 
-Global and static variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to 0 (\*`zero initialized`). 
+**Global** and **static** variables in C++ are usually initialized at compile time if their values can be determined at that time. However, if the initialization depends on a function that is not `constexpr`, even if the function's arguments are known, compile-time initialization is not possible. In such cases, the variable is set to 0 (\*`zero initialized`). 
 
 Let’s look at an example to understand this issue better.
 
@@ -79,7 +79,7 @@ extern constinit int sum_result;
 int static_val = sum_result;
 ```
 
-Because `sum_result` is defined in another translation unit, `static_val` is zero-initialized since the value of `sum_result` is not available during the compile step.
+Because `sum_result` is defined in another translation unit, `static_val` is \*`zero-initialized` since the value of `sum_result` is not available during the compile step.
 
 ### `main.cpp`
 
@@ -98,7 +98,7 @@ Now, it no longer matters which translation unit the linker processes first. `st
 
 ## Conclusion
 
-To guarantee initialization of global or static variables at compile time:
+To guarantee initialization of **global** or **static** variables at compile time:
 
 `1.` All values must be known at compile time
 
