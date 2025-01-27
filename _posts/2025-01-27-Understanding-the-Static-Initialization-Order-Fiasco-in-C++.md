@@ -1,9 +1,8 @@
 ---
 title: Understanding the Static Initialization Order Fiasco in C++
-description: A concise exploration of the Static Initialization Order Fiasco in C++, including its causes, examples, and solutions for developers.
 categories: [Programming, C++]
 tags: [c++, static-initialization, initialization-order, constexpr, constinit, global-variables, static-variables, compile-time, linker, zero-initialization]
-date: 27-01-2025 12:00:00 +0100
+description: A concise exploration of the Static Initialization Order Fiasco in C++
 ---
 
 ## Introduction
@@ -64,6 +63,7 @@ Now, it no longer matters which translation unit the linker processes first. `st
 To guarantee initialization of global or static variables at compile time:
 
 `1.` All values must be known at compile time
+
 `2.` The variable must be marked with either the `constexpr` or `constinit` keyword
 
 Although compilers often perform compile-time initialization without these keywords, this behavior **is not guaranteed** unless the keywords are **explicitly** used.
