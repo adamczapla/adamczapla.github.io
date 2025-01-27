@@ -5,4 +5,5 @@ categories: [Programming, C++]
 tags: [c++, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions]
 description: "A detailed exploration of 'if consteval' in C++, its advantages over std::is_constant_evaluated(), and how it improves compile-time evaluation handling."
 ---
+
 ## Intro
