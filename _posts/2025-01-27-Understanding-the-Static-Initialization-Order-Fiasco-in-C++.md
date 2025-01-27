@@ -1,5 +1,5 @@
 ---
-title: Understanding of the Static Initialization Order Fiasco in C++
+title: Understanding the Static Initialization Order Fiasco in C++
 date: 27-01-2025 12:00:00 +0100
 categories: [Programming, C++]
 tags: [c++, static-initialization, initialization-order, constexpr, constinit, global-variables, static-variables, compile-time, linker, zero-initialization]
