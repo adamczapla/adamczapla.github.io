@@ -25,7 +25,7 @@ auto sum(int a, int b) {
 int sum_result = sum(5, 5);
 ```
 
-The global variable `sum_result` is set to 0 (\*`zero-initialized`) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later.
+The global variable `sum_result` is set to `0` (\*`zero-initialized`) because the `sum` function is not marked as `constexpr`. Even though the values `5` and `5` are known at compile time, the lack of `constexpr` prevents the compiler from evaluating the result at compile time. Moreover, even with `constexpr`, initialization is not guaranteed unless stricter requirements like `consteval` are used — this will be discussed later.
 
 ### `file2.cpp`
 
@@ -34,7 +34,7 @@ extern int sum_result;
 int static_val = sum_result;
 ```
 
-The global variable `static_val` is also set to 0 (\*`zero-initialized`), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
+The global variable `static_val` is also set to `0` (\*`zero-initialized`), as the value of `sum_result` is defined in another **translation unit** and not available in the current one.
 
 ### `main.cpp`
 
@@ -43,15 +43,15 @@ extern int sum_result;
 extern int static_val;
 
 auto main() -> int {
-  std::cout << "sum_result = " << sum_result << '\n'; // output: 10
-  std::cout << "static_val = " << static_val << '\n'; // output: 10 oder 0
+  std::cout << "sum_result = " << sum_result << '\n'; // output: `10`
+  std::cout << "static_val = " << static_val << '\n'; // output: `10` oder `0`
   return 0;
 }
 ```
 
 The **linker** decides at link time which **translation unit** it processes first.
-- If it processes `file1.cpp` first, `sum_result` is initialized to 10, and `static_val` is also set to 10.
-- If it processes `file2.cpp` first, `static_val` is set to 0, and then `sum_result` is initialized to 10.
+- If it processes `file1.cpp` first, `sum_result` is initialized to `10`, and `static_val` is also set to `10`.
+- If it processes `file2.cpp` first, `static_val` is set to `0`, and then `sum_result` is initialized to `10`.
 
 This behavior leads to a discrepancy between the values of `sum_result` and `static_val`, even though they are logically expected to be the same. 
 
@@ -88,13 +88,13 @@ extern constinit int sum_result;
 extern int static_val;
 
 auto main() -> int {
-	std::cout << "sum_result = " << sum_result << '\n'; // output: 10
-	std::cout << "static_val = " << static_val << '\n'; // output: 10
+	std::cout << "sum_result = " << sum_result << '\n'; // output: `10`
+	std::cout << "static_val = " << static_val << '\n'; // output: `10`
 	return 0;
 }
 ```
 
-Now, it no longer matters which translation unit the linker processes first. `static_val` will **always** be initialized with the value 10 because `sum_result` is **guaranteed** to be initialized at compile time.
+Now, it no longer matters which translation unit the linker processes first. `static_val` will **always** be initialized with the value `10` because `sum_result` is **guaranteed** to be initialized at compile time.
 
 ## Conclusion
 
