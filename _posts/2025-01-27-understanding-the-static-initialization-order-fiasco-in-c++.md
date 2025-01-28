@@ -109,7 +109,7 @@ Although compilers often perform compile-time initialization without these keywo
 
 Understanding the **Static Initialization Order Fiasco** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
-### Footnote:
+## Footnote:
 
 [^1]: `Zero-initialization` depends on the data type and sets the value to a `null value` defined by the type:
     - For arithmetic types (e.g., `int`, `float`), it is `0` or `0.0`.
