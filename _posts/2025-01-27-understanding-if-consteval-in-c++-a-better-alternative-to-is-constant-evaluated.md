@@ -1,8 +1,8 @@
 ---
 title: "Understanding 'if consteval' in C++: A Better Alternative to std::is_constant_evaluated()"
 date: 27-01-2025 12:00:00 +0100
-categories: [Programming, C++]
-tags: [c++, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions]
+categories: [Compile time, Programming]
+tags: [c++, c++23, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions]
 description: "A detailed exploration of 'if consteval' and its advantages over std::is_constant_evaluated() in C++."
 ---
 
@@ -19,7 +19,7 @@ Consider the following `constexpr` function:
 ```c++
 consteval auto consteval_func(int val) { return val; }
 
-constexpr auto is_constant_evaluated(int val) {
+constexpr auto constexpr_func(int val) {
   if (std::is_constant_evaluated()) {
     return consteval_func(val);
   } else {
@@ -34,7 +34,7 @@ The compiler produces an error at the line (**`5`**), because the parameter `val
 Logically, this seems unnecessary since the `if (std::is_constant_evaluated())` branch will only execute at compile-time. And even though `val` isn’t `constexpr`, the `constexpr` function would have been invoked with a `constexpr` argument if executed at compile-time. For example:
 
 ```c++
-constexpr auto val = [] consteval { return is_constant_evaluated(42); }();
+constexpr auto val = [] consteval { return constexpr_func(42); }();
 ```
 
 ## Why does it still not work?
@@ -53,7 +53,7 @@ Here’s how `if consteval` resolves the issue:
 ```c++
 consteval auto consteval_func(int val) { return val; }
 
-constexpr auto is_constant_evaluated(int val) {
+constexpr auto constexpr_func(int val) {
   if consteval {
     return consteval_func(val);
   } else {
