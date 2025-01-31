@@ -21,6 +21,11 @@ However, `std::string` is not a literal type, even though it has `constexpr` con
 Let's consider the following example:
 
 ```c++
+auto main() -> int { // non-constexpr context
+  std::string str{"hello world"}; 
+  constexpr auto str_view = to_string_view(str);
+  return 0;
+}
 ```
 
 Here, the call fails because `std::string` cannot be used as an argument in a `constexpr` function to initialize a `constexpr` variable.
@@ -28,6 +33,11 @@ Here, the call fails because `std::string` cannot be used as an argument in a `c
 It also does not help to declare the variable `str` as `constexpr`, as shown in the following example:
 
 ```c++
+auto main() -> int { // non-constexpr context
+  constexpr std::string str{"hello world"};
+  constexpr auto str_view = to_string_view(str);
+  return 0;
+}
 ```
 
 ### 1. Passing a `prvalue` instead of an `lvalue`
@@ -35,6 +45,10 @@ It also does not help to declare the variable `str` as `constexpr`, as shown in 
 Instead of passing a variable, we use a temporary value (`prvalue`):
 
 ```c++
+auto main() -> int { // non-constexpr context
+  constexpr auto str_view = to_string_view(std::string{"hello world"});
+  return 0;
+}
 ```
 
 Since C++17, `prvalues` are no longer objects but pure expressions. The materialization into an object occurs only within the `constexpr` function `to_string_view`, making the code valid because the temporary `std::string` does not need to be `constexpr` at the time of the call.
@@ -44,6 +58,13 @@ Since C++17, `prvalues` are no longer objects but pure expressions. The material
 Alternatively, the `std::string` can be encapsulated in a lambda:
 
 ```c++
+auto main() -> int { // non-constexpr context
+  constexpr auto str_view = [] {
+    std::string str{"hello world"};
+    return to_string_view(str);
+  }();
+  return 0;
+}
 ```
 
 Since lambdas have been implicitly constexpr since C++17, the call to the `constexpr` function takes place from a `constexpr` context.
@@ -53,6 +74,19 @@ Since lambdas have been implicitly constexpr since C++17, the call to the `const
 To implement `to_string_view`, we first convert `std::string` into `std::array`. 
 
 ```c++
+namespace rng = std::ranges;
+
+template <auto max_size> 
+consteval auto to_string_view(std::string const& str) {
+  std::array<char, max_size> max_size_array{};
+  rng::copy(str, max_size_array.begin());
+  return max_size_array;
+}
+
+auto main() -> int { // non-constexpr context
+  constexpr auto str_view = to_string_view<128>(std::string{"hello world!"});
+  return 0;
+}
 ```
 
 The key limitation of `std::string` and other non-literal types is that they must deallocate their memory in a `constexpr` context. If their values need to leave the `constexpr` context, they must be copied into a literal type.
@@ -64,6 +98,24 @@ The key limitation of `std::string` and other non-literal types is that they mus
 Since we never know the exact array size in advance, we first create an oversized array and then trim it to the exact size.
 
 ```c++
+namespace rng = std::ranges;
+
+template <auto max_size> 
+constexpr auto to_oversized_array(std::string const& str) {
+  std::array<char, max_size> max_size_array{};
+  auto const end_pos = rng::copy(str, rng::begin(max_size_array));
+  auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
+  return std::pair{max_size_array, right_size};
+}
+
+template <auto max_size> 
+consteval auto to_string_view(std::string const& str) {
+  constexpr auto intermediate_data = to_oversized_array<max_size>(str);
+  std::array<char, intermediate_data.second> right_size_array{};
+  rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second,
+              rng::begin(right_size_array));
+  return right_size_array;
+}
 ```
 
 ### Problem: Function Parameters in C++ Are Never `constexpr`
@@ -75,6 +127,29 @@ The function parameter `str` is not `constexpr`, yet we pass it as an argument t
 Instead of passing `std::string` as a parameter, we encapsulate it in a lambda and pass it as an NTTP.
 
 ```c++
+namespace rng = std::ranges;
+
+template <auto max_size, auto string_builder> 
+constexpr auto to_oversized_array() {
+  std::array<char, max_size> max_size_array{};
+  auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
+  auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
+  return std::pair{max_size_array, right_size};
+}
+
+template <auto max_size, auto string_builder> 
+consteval auto to_string_view() {
+  constexpr auto intermediate_data = to_oversized_array<max_size, string_builder>();
+  std::array<char, intermediate_data.second> right_size_array{};
+  rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second,
+              rng::begin(right_size_array));
+  return right_size_array;
+}
+
+auto main() -> int { // non-constexpr context
+  constexpr auto str_view = to_string_view<128, [] { return std::string{"hello world!"}; }>();
+  return 0;
+}
 ```
 
 ### Optimization: Optional
@@ -82,6 +157,21 @@ Instead of passing `std::string` as a parameter, we encapsulate it in a lambda a
 To keep everything in place, we encapsulate the function `to_oversized_array` in a lambda.
 
 ```c++
+namespace rng = std::ranges;
+
+template <auto max_size, auto string_builder> 
+consteval auto to_string_view() {
+  constexpr auto intermediate_data = []() {
+    std::array<char, max_size> max_size_array{};
+    auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
+    auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
+    return std::pair{max_size_array, right_size};
+  }();
+  std::array<char, intermediate_data.second> right_size_array{};
+  rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second,
+  rng::begin(right_size_array));
+  return right_size_array;
+}
 ```
 
 ## Converting `std::array` into `std::string_view`
@@ -89,6 +179,26 @@ To keep everything in place, we encapsulate the function `to_oversized_array` in
 By marking the array `right_size_array` with `static constexpr`, we store it in static memory and allow it to be referenced using a `std::string_view` instance. This instance is then returned to the caller of the `to_string_view` function.
 
 ```c++
+namespace rng = std::ranges;
+
+template <auto max_size, auto string_builder> 
+consteval auto to_string_view() {
+  constexpr auto intermediate_data = []() {
+    std::array<char, max_size> max_size_array{};
+    auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
+    auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
+    return std::pair{max_size_array, right_size};
+  }();
+
+  static constexpr auto right_size_array = [&intermediate_data] {
+    std::array<char, intermediate_data.second> right_size_array{};
+    rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second,
+                rng::begin(right_size_array));
+    return right_size_array;
+  }();
+
+  return std::string_view{right_size_array}; 
+}
 ```
 
 ### Portability: Using `to_static` for Clang
@@ -96,11 +206,32 @@ By marking the array `right_size_array` with `static constexpr`, we store it in 
 Since Clang has issues with `static constexpr` in `consteval` functions in C++23, the following helper function ensures portability:
 
 ```c++
+template <auto value> consteval auto& to_static() { return value; }
 ```
 
 We call this function with the array `right_size_array` as a Non-Type Template Parameter (NTTP). NTTPs allow values to be stored directly in the static memory area, making them referenceable. This way, we can safely store `std::array` data in static memory and return it as `std::string_view`.
 
 ```c++
+namespace rng = std::ranges;
+
+template <auto value> consteval auto& to_static() { return value; }
+
+template <auto max_size, auto string_builder> consteval auto to_string_view() {
+  constexpr auto intermediate_data = []() {
+    std::array<char, max_size> max_size_array{};
+    auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
+    auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
+    return std::pair{max_size_array, right_size};
+  }();
+
+  constexpr auto right_size_array = [&intermediate_data] {
+    std::array<char, intermediate_data.second> right_size_array{};
+    rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second, rng::begin(right_size_array));
+    return right_size_array; 
+  }();
+
+  return std::string_view{to_static<right_size_array>()};
+}
 ```
 
 With this, our compile-time conversion from `std::string` to `std::string_view` is not only complete but also portable and efficient.
@@ -110,6 +241,25 @@ With this, our compile-time conversion from `std::string` to `std::string_view` 
 A practical example is creating log tags for generic types:
 
 ```c++
+template <typename T>
+constexpr auto type_name() { // GCC only
+  constexpr std::string_view prefix = "constexpr auto type_name() [with T = ";
+  std::string_view name = __PRETTY_FUNCTION__;
+  name.remove_prefix(prefix.size());
+  name.remove_suffix(1);
+  return name;
+}
+
+template <typename T>
+constexpr auto log_tag() {
+  return to_string_view<64, []{ return "Log<" + std::string(type_name<T>()) + ">"; }>();
+}
+
+auto main() -> int { // non-constexpr context
+	static constexpr auto log_string = log_tag<std::vector<std::string>>();
+	// output: Log<std::vector<std::__cxx11::basic_string<char> >>
+  return 0;
+}
 ```
 
 Here, a log tag for a generic type is created at compile time. This reduces runtime costs and avoids unnecessary memory allocations.
