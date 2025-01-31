@@ -256,8 +256,8 @@ constexpr auto log_tag() {
 }
 
 auto main() -> int { // non-constexpr context
-	static constexpr auto log_string = log_tag<std::vector<std::string>>();
-	// output: Log<std::vector<std::__cxx11::basic_string<char> >>
+  static constexpr auto log_string = log_tag<std::vector<std::string>>();
+  // output: Log<std::vector<std::__cxx11::basic_string<char> >>
   return 0;
 }
 ```
