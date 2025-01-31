@@ -2,7 +2,7 @@
 title: "Compile-Time Programming in C++: New Possibilities with C++20 and C++23"
 date: 31-01-2025 12:00:00 +0100
 categories: [C++, Compile-time programming]
-tags: [c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view]
+tags: [c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view, array]
 description: "A detailed exploration of ..."
 ---
 
@@ -161,7 +161,7 @@ namespace rng = std::ranges;
 
 template <auto max_size, auto string_builder> 
 consteval auto to_string_view() {
-  constexpr auto intermediate_data = []() {
+  constexpr auto intermediate_data = [] {
     std::array<char, max_size> max_size_array{};
     auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
     auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
@@ -183,7 +183,7 @@ namespace rng = std::ranges;
 
 template <auto max_size, auto string_builder> 
 consteval auto to_string_view() {
-  constexpr auto intermediate_data = []() {
+  constexpr auto intermediate_data = [] {
     std::array<char, max_size> max_size_array{};
     auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
     auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
@@ -217,7 +217,7 @@ namespace rng = std::ranges;
 template <auto value> consteval auto& to_static() { return value; }
 
 template <auto max_size, auto string_builder> consteval auto to_string_view() {
-  constexpr auto intermediate_data = []() {
+  constexpr auto intermediate_data = [] {
     std::array<char, max_size> max_size_array{};
     auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
     auto const right_size = rng::distance(rng::cbegin(max_size_array), end_pos.out);
@@ -252,7 +252,7 @@ constexpr auto type_name() { // GCC only
 
 template <typename T>
 constexpr auto log_tag() {
-  return to_string_view<64, []{ return "Log<" + std::string(type_name<T>()) + ">"; }>();
+  return to_string_view<64, [] { return "Log<" + std::string(type_name<T>()) + ">"; }>();
 }
 
 auto main() -> int { // non-constexpr context
