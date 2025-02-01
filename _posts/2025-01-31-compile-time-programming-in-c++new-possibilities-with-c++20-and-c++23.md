@@ -2,19 +2,19 @@
 title: "Compile-Time Programming in C++: New Possibilities with C++20 and C++23"
 date: 31-01-2025 12:00:00 +0100
 categories: [C++, Compile-time programming]
-tags: [c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view, array]
-description: "A detailed exploration of ..."
+tags: [c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view, array, literal-type, performance, optimization]
+description: "A deep dive into compile-time programming in C++20 and C++23, focusing on efficient `std::string` to `std::string_view` conversion."
 ---
 
 ## Introduction
 
-Efficiency is a **key factor** in modern C++ projects. Especially in performance-critical applications, it is beneficial to avoid expensive memory allocations and runtime computations. The new features in `C++20` and `C++23` greatly expand compile-time programming, allowing even non-literal types like `std::string` and `std::vector` to be processed at compile time.
+Efficiency is a key factor in modern C++ projects. Especially in performance-critical applications, it is beneficial to avoid expensive memory allocations and runtime computations. The new features in `C++20` and `C++23` greatly expand compile-time programming, allowing even non-`literal types`[^1] like `std::string` and `std::vector` to be processed at compile time.
 
 In this article, I will show a concrete example of how to efficiently convert `std::string` into `std::string_view` at compile time. This reduces runtime costs, avoids unnecessary dynamic memory allocations, and enables new optimizations – such as for logging or generated code metadata. In addition to the new language features, I will explain fundamental concepts of compile-time programming and present practical solutions to common challenges.
 
 ## Challenge: Using `std::string` as `constexpr`
 
-Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be `literal types`[^1], meaning their values must be known at compile time.
+Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be `literal types`, meaning their values must be known at compile time.
 
 However, `std::string` is not a literal type, even though it has `constexpr` constructors since `C++20` and can be used in a `constexpr` context at compile time.
 
@@ -89,7 +89,7 @@ auto main() -> int { // non-constexpr context
 }
 ```
 
-> The key limitation of `std::string` and other non-literal types is that they **must** deallocate their memory in a `constexpr` context. If their values need to leave the `constexpr` context, they **must** be copied into a literal type.
+> The key limitation of `std::string` and other non-literal types is that they **must** deallocate their memory in a `constexpr` context. If their values need to leave the `constexpr` context, they **must** be copied into a `literal type`[^1].
 {: .prompt-info }
 
 `std::array` is therefore an ideal choice for storing the `std::string` value. The maximum size of the array is passed as a **Non-Type Template Parameter (NTTP)** because function parameters in C++ can **never** be `constexpr` and when instantiating the `right_size_array` array, `max_size` must be a constant expression.
