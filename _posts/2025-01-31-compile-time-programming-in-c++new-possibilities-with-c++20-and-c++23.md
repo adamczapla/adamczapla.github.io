@@ -14,7 +14,7 @@ In this article, I will show a concrete example of how to efficiently convert `s
 
 ## Challenge: Using `std::string` as `constexpr`
 
-Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be literal types, meaning their values must be known at compile time.
+Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be `literal types`[^1], meaning their values must be known at compile time.
 
 However, `std::string` is not a literal type, even though it has `constexpr` constructors since `C++20` and can be used in a `constexpr` context at compile time.
 
@@ -272,3 +272,22 @@ Here, a *log tag* for a generic type is created at compile time. This reduces ru
 The new features in `C++20/23` enable powerful compile-time manipulations even for non-literal types. The techniques shown allow efficient conversion of `std::string` into `std::string_view`, reducing runtime costs.
 
 Especially in performance-critical applications, compile-time programming can provide significant advantages. The ability to process strings efficiently at compile time opens up exciting optimization possibilities – not only for logging but also for many other areas of modern C++ development.
+
+## Footnote
+
+[^1]:
+
+### What are Literal Types?
+
+A literal type in C++ is a type that can be used in a constexpr context, meaning inside constant expressions. This includes:
+* Built-in types such as int, char, double, bool, and nullptr_t
+* Enumerations (enum and enum class)
+* Pointer types to literal types, including const and nullptr_t pointers
+* Pointers to members of literal types
+* `Literal classes`[^2].
+
+[^2]:
+
+### Requirements for a class to be a literal class
+
+1. All non-static members must be literals.
