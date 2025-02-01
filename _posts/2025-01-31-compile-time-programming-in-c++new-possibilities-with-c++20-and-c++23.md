@@ -299,21 +299,22 @@ Especially in performance-critical applications, compile-time programming can pr
     11. `Static` member variables and functions are allowed if they are `constexpr` and of a literal type.
     12. `Friend` functions are allowed inside literal classes.
     13. Default arguments for constructors or functions must be `constant expressions`.
+    
     > A literal type ensures that objects of this type can be evaluated at compile time, as long as all dependent expressions are `constexpr`. 
     {: .prompt-info }
 
 [^3]: **Requirements for a class to be a `aggregate class`**
     
-    1. **What is allowed:**
+    **`1.` What is allowed:**
 
     * `Public` members
     * `User-declared` destructor
     * `User-declared` copy and move assignment operators
     * Members can be `not literals`
     * `Public` inheritance
-    * `Protected` or `private` **static** members
+    *  `Protected` or `private` **static** members
 
-    2. **What is not allowed:**
+    **`2.` What is not allowed:**
 
     * `Protected` and `private` **non-static** members
     * `User-declared` constructors
@@ -322,7 +323,7 @@ Especially in performance-critical applications, compile-time programming can pr
     * `Protected/private` or `virtual` inheritance
     * Inherited constructors (by `using` declaration)
 
-    3. **Restrictions for the base class:**
+    **`3.` Restrictions for the base class:**
 
     * Only `public` **non-static** members allowed OR
     * `Public` constructor required for `non-public` **non-static** members
