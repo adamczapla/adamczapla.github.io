@@ -14,7 +14,7 @@ In this article, I will show a concrete example of how to efficiently convert `s
 
 ## Challenge: Using `std::string` as `constexpr`
 
-Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be `literal types`, meaning their values must be known at compile time.
+Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be literal types, meaning their values must be known at compile time.
 
 However, `std::string` is not a literal type, even though it has `constexpr` constructors since `C++20` and can be used in a `constexpr` context at compile time.
 
@@ -148,7 +148,9 @@ consteval auto to_string_view() {
 }
 
 auto main() -> int { // non-constexpr context
-  constexpr auto str_view = to_string_view<128, [] { return std::string{"hello world!"}; }>();
+  constexpr auto str_view = to_string_view<128, [] {
+    return std::string{"hello world!"};
+  }>();
   return 0;
 }
 ```
