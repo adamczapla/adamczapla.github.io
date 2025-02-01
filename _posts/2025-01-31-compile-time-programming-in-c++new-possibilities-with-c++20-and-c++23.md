@@ -8,13 +8,13 @@ description: "A deep dive into compile-time programming in C++20 and C++23, focu
 
 ## Introduction
 
-Efficiency is a key factor in modern C++ projects. Especially in performance-critical applications, it is beneficial to avoid expensive memory allocations and runtime computations. The new features in `C++20` and `C++23` greatly expand compile-time programming, allowing even non-`literal types`[^1] like `std::string` and `std::vector` to be processed at compile time.
+Efficiency is a key factor in modern C++ projects. Especially in performance-critical applications, it is beneficial to avoid expensive memory allocations and runtime computations. The new features in `C++20` and `C++23` greatly expand compile-time programming, allowing even non-literal types like `std::string` and `std::vector` to be processed at compile time.
 
 In this article, I will show a concrete example of how to efficiently convert `std::string` into `std::string_view` at compile time. This reduces runtime costs, avoids unnecessary dynamic memory allocations, and enables new optimizations – such as for logging or generated code metadata. In addition to the new language features, I will explain fundamental concepts of compile-time programming and present practical solutions to common challenges.
 
 ## Challenge: Using `std::string` as `constexpr`
 
-Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be literal types, meaning their values must be known at compile time.
+Every call to a `constexpr` or `consteval` function from a non-`constexpr` context requires all function arguments to be `literal types`[^1], meaning their values must be known at compile time.
 
 However, `std::string` is not a literal type, even though it has `constexpr` constructors since `C++20` and can be used in a `constexpr` context at compile time.
 
@@ -149,8 +149,7 @@ consteval auto to_string_view() {
 
 auto main() -> int { // non-constexpr context
   constexpr auto str_view = to_string_view<128, [] {
-    return std::string{"hello world!"};
-  }>();
+    return std::string{"hello world!"}; }>();
   return 0;
 }
 ```
