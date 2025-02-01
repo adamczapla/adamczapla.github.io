@@ -8,7 +8,7 @@ description: "A detailed exploration of ..."
 
 ## Introduction
 
-**Efficiency** is a key factor in modern C++ projects. Especially in performance-critical applications, it is beneficial to avoid expensive memory allocations and runtime computations. The new features in `C++20` and `C++23` greatly expand compile-time programming, allowing even non-literal types like `std::string` and `std::vector` to be processed at compile time.
+Efficiency is a **key factor** in modern C++ projects. Especially in performance-critical applications, it is beneficial to avoid expensive memory allocations and runtime computations. The new features in `C++20` and `C++23` greatly expand compile-time programming, allowing even non-literal types like `std::string` and `std::vector` to be processed at compile time.
 
 In this article, I will show a concrete example of how to efficiently convert `std::string` into `std::string_view` at compile time. This reduces runtime costs, avoids unnecessary dynamic memory allocations, and enables new optimizations – such as for logging or generated code metadata. In addition to the new language features, I will explain fundamental concepts of compile-time programming and present practical solutions to common challenges.
 
@@ -89,10 +89,8 @@ auto main() -> int { // non-constexpr context
 }
 ```
 
-
 > The key limitation of `std::string` and other non-literal types is that they **must** deallocate their memory in a `constexpr` context. If their values need to leave the `constexpr` context, they **must** be copied into a literal type.
 {: .prompt-info }
-
 
 `std::array` is therefore an ideal choice for storing the `std::string` value. The maximum size of the array is passed as a **Non-Type Template Parameter (NTTP)** because function parameters in C++ can **never** be `constexpr` and when instantiating the `right_size_array` array, `max_size` must be a constant expression.
 
