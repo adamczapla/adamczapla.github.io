@@ -293,11 +293,8 @@ Especially in performance-critical applications, compile-time programming can pr
     **`3.`** In-class initializations for non-static members of built-in types must be constant expressions.
 
     **`4.`** In-class initializations for non-static members of class types must either use a user-defined constexpr constructor or have no     initializer. If no initializer is given, the default constructor of the class must be constexpr. Alternatively, all non-static members of the class must be initialized in-class.
-
     **`5.`** A constexpr constructor must initialize every member or at least those that are not initialized in-class.
-
     **`6.`** Virtual or normal default destructors are allowed, but user-defined destructors with {} are not allowed. User-defined constructors with {} are allowed if they are declared as constexpr. However, user-defined constexpr destructors in literal classes are often of limited use because literal classes do not manage dynamic resources. In non-literal classes, however, they can be important, especially for properly deallocating dynamic resources in a constexpr context.
-
     **`7.`** Virtual functions are allowed, but pure virtual functions are not.
 
     **`8.`** Private and protected member functions are allowed.
