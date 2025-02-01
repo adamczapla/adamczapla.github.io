@@ -277,16 +277,16 @@ Especially in performance-critical applications, compile-time programming can pr
 
 [^1]: **What are Literal Types?**
 
-    A literal type in C++ is a type that can be used in a `constexpr` context, meaning inside constant expressions. This includes:
+    A literal type in C++ is a type that can be used in a `constexpr` context, meaning inside `constant expressions`. This includes:
     * Built-in types such as `int`, `char`, `double`, `bool`, and `nullptr_t`
     * Enumerations (`enum` and `enum class`)
-    * Pointer types to literal types, including const and nullptr_t pointers
-    * Pointers to members of literal types
-    * `Literal classes`[^2]. 
+    * `Pointer` types to literal types, including `const` and `nullptr_t` pointers
+    * `Pointers to members` of literal types
+    * `Literal classes`[^2]
 
 [^2]: **Requirements for a class to be a `literal class`**
 
-    1. All non-static members must be literals.
+    1. All `non-static` members must be literals.
     
     2. The class must have at least one user-defined `constexpr` constructor, or all `non-static` members must be initialized `in-class`.
     
@@ -304,7 +304,7 @@ Especially in performance-critical applications, compile-time programming can pr
     
     9. `Private` and `protected` inheritance are allowed, but `virtual` inheritance is not.
     
-    10. `Aggregate classes` with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
+    10. `Aggregate classes`[^3] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
     
     11. `Static` member variables and functions are allowed if they are `constexpr` and of a literal type.
     
@@ -314,5 +314,29 @@ Especially in performance-critical applications, compile-time programming can pr
     
     > A literal type ensures that objects of this type can be evaluated at compile time, as long as all dependent expressions are `constexpr`. 
     {: .prompt-info }
+
+[^3]: **Requirements for a class to be a `aggregate class`**
     
+    **What is allowed:**
+
+    * Public members
+    * User-declared destructor
+    * User-declared copy and move assignment operators
+    * Members can be "not literals"
+    * Public inheritance
+    * Protected or private static members
+
+    **What is not allowed:**
+
+    * Protected and private non-static members
+    * User-declared constructors
+    * Virtual destructor
+    * Virtual member functions
+    * Protected/private or virtual inheritance
+    * Inherited constructors (by using declaration)
+
+    **Restrictions for the base class:**
+
+    * Only public non-static members allowed OR
+    * Public constructor required for non-public non-static members
     
