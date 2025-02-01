@@ -305,26 +305,23 @@ Especially in performance-critical applications, compile-time programming can pr
 
 [^3]: **Requirements for a class to be a `aggregate class`**
     
-    **`1.` What is allowed:**
-
+    1. **What is allowed:**
       * `Public` members
       * `User-declared` destructor
       * `User-declared` copy and move assignment operators
       * Members can be `not literals`
       * `Public` inheritance
       *  `Protected` or `private` **static** members
-
-    **`2.` What is not allowed:**
-
+    
+    2. **What is not allowed:**
       * `Protected` and `private` **non-static** members
       * `User-declared` constructors
       * `Virtual` destructor
       * `Virtual` member functions
       * `Protected/private` or `virtual` inheritance
       * Inherited constructors (by `using` declaration)
-
-    **`3.` Restrictions for the base class:**
-
+    
+    3. ** Restrictions for the base class:**
       * Only `public` **non-static** members allowed OR
       * `Public` constructor required for `non-public` **non-static** members
     
