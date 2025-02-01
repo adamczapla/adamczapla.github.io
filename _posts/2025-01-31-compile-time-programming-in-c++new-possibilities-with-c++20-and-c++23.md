@@ -275,19 +275,28 @@ Especially in performance-critical applications, compile-time programming can pr
 
 ## Footnote
 
-[^1]:
+[^1]: ### What are Literal Types?
 
-### What are Literal Types?
+    A literal type in C++ is a type that can be used in a constexpr context, meaning inside constant expressions. This includes:
+    * Built-in types such as int, char, double, bool, and nullptr_t
+    * Enumerations (enum and enum class)
+    * Pointer types to literal types, including const and nullptr_t pointers
+    * Pointers to members of literal types
+    * `Literal classes`[^2].
 
-A literal type in C++ is a type that can be used in a constexpr context, meaning inside constant expressions. This includes:
-* Built-in types such as int, char, double, bool, and nullptr_t
-* Enumerations (enum and enum class)
-* Pointer types to literal types, including const and nullptr_t pointers
-* Pointers to members of literal types
-* `Literal classes`[^2].
+[^2]: ### Requirements for a class to be a literal class
 
-[^2]:
-
-### Requirements for a class to be a literal class
-
-1. All non-static members must be literals.
+    `1.` All non-static members must be literals.
+    `2.` The class must have at least one user-defined constexpr constructor, or all non-static members must be initialized in-class.
+    `3.` In-class initializations for non-static members of built-in types must be constant expressions.
+    4. In-class initializations for non-static members of class types must either use a user-defined constexpr constructor or have no     initializer. If no initializer is given, the default constructor of the class must be constexpr. Alternatively, all non-static members of the class must be initialized in-class.
+    5. A constexpr constructor must initialize every member or at least those that are not initialized in-class.
+    6. Virtual or normal default destructors are allowed, but user-defined destructors with {} are not allowed. User-defined constructors with {} are allowed if they are declared as constexpr. However, user-defined constexpr destructors in literal classes are often of limited use because literal classes do not manage dynamic resources. In non-literal classes, however, they can be important, especially for properly deallocating dynamic resources in a constexpr context.
+    7. Virtual functions are allowed, but pure virtual functions are not.
+    8. Private and protected member functions are allowed.
+    9. Private and protected inheritance are allowed, but virtual inheritance is not.
+    10. Aggregate classes with only literal non-static members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
+    11. Static member variables and functions are allowed if they are constexpr and of a literal type.
+    12. Friend functions are allowed inside literal classes.
+    13. Default arguments for constructors or functions must be constant expressions.
+    
