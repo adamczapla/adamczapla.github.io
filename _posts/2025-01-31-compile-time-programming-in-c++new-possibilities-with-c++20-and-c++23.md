@@ -89,9 +89,9 @@ auto main() -> int { // non-constexpr context
 }
 ```
 
-The key limitation of `std::string` and other non-literal types is that they must deallocate their memory in a `constexpr` context. If their values need to leave the `constexpr` context, they must be copied into a literal type.
+The key limitation of `std::string` and other non-literal types is that they **must** deallocate their memory in a `constexpr` context. If their values need to leave the `constexpr` context, they **must** be copied into a literal type.
 
-`std::array` is therefore an ideal choice for storing the `std::string` value. The maximum size of the array is passed as a Non-Type Template Parameter (NTTP) because function parameters in C++ can never be `constexpr` and when instantiating the `right_size_array` array, `max_size` must be a constant expression.
+`std::array` is therefore an ideal choice for storing the `std::string` value. The maximum size of the array is passed as a **Non-Type Template Parameter (NTTP)** because function parameters in C++ can **never** be `constexpr` and when instantiating the `right_size_array` array, `max_size` must be a constant expression.
 
 ### Dynamic Adjustment of Array Size
 
@@ -120,7 +120,7 @@ consteval auto to_string_view(std::string const& str) {
 
 ### Problem: Function Parameters in C++ Are Never `constexpr`
 
-The function parameter `str` is not `constexpr`, yet we pass it as an argument to a `constexpr` function that initializes a `constexpr` variable. However, the variable `intermediate_data` must remain `constexpr` because, when instantiating the `right_size_array` array (in the next line), the size must be a constant expression.
+The function parameter `str` is not `constexpr`, yet we pass it as an argument to a `constexpr` function that initializes a `constexpr` variable. However, the variable `intermediate_data` **must** remain `constexpr` because, when instantiating the `right_size_array` array (`line 14`), the size **must** be a constant expression.
 
 ### Solution: Lambda as NTTP
 
@@ -176,7 +176,7 @@ consteval auto to_string_view() {
 
 ## Converting `std::array` into `std::string_view`
 
-By marking the array `right_size_array` with `static constexpr`, we store it in static memory and allow it to be referenced using a `std::string_view` instance. This instance is then returned to the caller of the `to_string_view` function.
+By marking the array `right_size_array` with `static constexpr`, we store it in **static memory** and allow it to be referenced using a `std::string_view` instance. This instance is then returned to the caller of the `to_string_view` function.
 
 ```c++
 namespace rng = std::ranges;
@@ -209,14 +209,15 @@ Since Clang has issues with `static constexpr` in `consteval` functions in C++23
 template <auto value> consteval auto& to_static() { return value; }
 ```
 
-We call this function with the array `right_size_array` as a Non-Type Template Parameter (NTTP). NTTPs allow values to be stored directly in the static memory area, making them referenceable. This way, we can safely store `std::array` data in static memory and return it as `std::string_view`.
+We call this function with the array `right_size_array` as a **Non-Type Template Parameter (NTTP)**. NTTPs allow values to be stored directly in the static memory area, making them referenceable. This way, we can safely store `std::array` data in static memory and return it as `std::string_view`.
 
 ```c++
 namespace rng = std::ranges;
 
 template <auto value> consteval auto& to_static() { return value; }
 
-template <auto max_size, auto string_builder> consteval auto to_string_view() {
+template <auto max_size, auto string_builder>
+consteval auto to_string_view() {
   constexpr auto intermediate_data = [] {
     std::array<char, max_size> max_size_array{};
     auto const end_pos = rng::copy(string_builder(), rng::begin(max_size_array));
@@ -226,7 +227,8 @@ template <auto max_size, auto string_builder> consteval auto to_string_view() {
 
   constexpr auto right_size_array = [&intermediate_data] {
     std::array<char, intermediate_data.second> right_size_array{};
-    rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second, rng::begin(right_size_array));
+    rng::copy_n(rng::cbegin(intermediate_data.first), intermediate_data.second,
+                            rng::begin(right_size_array));
     return right_size_array; 
   }();
 
@@ -262,7 +264,7 @@ auto main() -> int { // non-constexpr context
 }
 ```
 
-Here, a log tag for a generic type is created at compile time. This reduces runtime costs and avoids unnecessary memory allocations.
+Here, a *log tag* for a generic type is created at compile time. This reduces runtime costs and avoids unnecessary memory allocations.
 
 ## Conclusion
 
