@@ -16,7 +16,7 @@ timezone: Europe/Berlin
 
 title: Adam Czapla # the main title
 
-tagline: My Experiences with C++ # it will display as the subtitle
+tagline: C++ insights straight to the point # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   Blog about the C++ programming language and its modern features.
