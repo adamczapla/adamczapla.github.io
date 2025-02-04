@@ -41,10 +41,10 @@ constexpr auto str_view = int_to_string_view<32, [] {
 }>();
 ```
 
-However, this step fails because the determined size (in our case, the variable `right_size`) is not a constant expression.
-
-> The **Compile-Time Staging Strategy (CTSS)** provides an elegant solution to this problem. It allows us to transform intermediate results   into `constexpr` values in multiple stages, ultimately enabling the creation of a valid `std::string_view`.
+> However, **this step fails** because the determined size (in our case, the variable `right_size`) **is not a constant expression**.
   {: .prompt-info }
+
+The **Compile-Time Staging Strategy (CTSS)** provides an elegant solution to this problem. It allows us to transform intermediate results   into `constexpr` values in multiple stages, ultimately enabling the creation of a valid `std::string_view`.
 
 ## The Compile-Time Staging Strategy (CTSS)
 
@@ -107,8 +107,8 @@ consteval auto int_to_string_view() {
   return std::string_view{to_static<rightsize_buffer>()}; // Error
 }
 ```
-
-**At this point, we face another problem:** How do we return a `std::string_view` pointing to an array when that array is a local variable? Simply **declaring the variable as `static` is not allowed** in a `constexpr` context.
+> **At this point, we face another problem:** How do we return a `std::string_view` pointing to an array when that array is a local variable? Simply **declaring the variable as `static` is not allowed** in a `constexpr` context.
+{: .prompt-info }
 
 **Two Possible Solutions:**
 
