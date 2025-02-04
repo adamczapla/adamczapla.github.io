@@ -274,10 +274,6 @@ The new features in `C++20/23` enable powerful compile-time manipulations even f
 
 Especially in performance-critical applications, compile-time programming can provide significant advantages. The ability to process strings efficiently at compile time opens up exciting optimization possibilities – not only for logging but also for many other areas of modern C++ development.
 
-## Footnote
-
-{% include footnote-literal-types.md %}
-
 ## Share your feedback
 
 ### Praise or criticism is appreciated!
@@ -299,3 +295,6 @@ Especially in performance-critical applications, compile-time programming can pr
         async>
 </script>
 
+## Footnote
+
+{% include footnote-literal-types.md %}
