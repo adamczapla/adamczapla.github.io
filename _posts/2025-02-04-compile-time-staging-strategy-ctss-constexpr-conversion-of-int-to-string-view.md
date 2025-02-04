@@ -7,9 +7,9 @@ description: "A detailed introduction to the Compile-Time Staging Strategy (CTSS
 
 ## Introduction
 
-With the latest `constexpr` extensions in C++, we can perform more and more computations at compile time. However, in practice, we repeatedly encounter a specific problem: **What do we do when a non-`constexpr` variable suddenly needs to be `constexpr` later in the program?**
+With the latest `constexpr` extensions in C++, we can perform more and more computations at compile time. However, in practice, we repeatedly encounter a specific problem: What do we do when a non-`constexpr` variable suddenly needs to be `constexpr` later in the program?
 
-**A typical example:** The `size` member of a `std::string` is used to instantiate a `std::array` of the corresponding size. The compiler rejects this because the size is **not** a constant expression.
+**A typical example:** The `size` member of a `std::string` is used to instantiate a `std::array` of the corresponding size. The compiler rejects this because the **size is not a constant expression**.
 
 This is where the **Compile-Time Staging Strategy (CTSS)** comes into play. It allows us to make values `constexpr` in multiple stages.
 
@@ -43,7 +43,8 @@ constexpr auto str_view = int_to_string_view<32, [] {
 
 However, this step fails because the determined size (in our case, the variable `right_size`) is not a constant expression.
 
-The **Compile-Time Staging Strategy (CTSS)** provides an elegant solution to this problem. It allows us to transform intermediate results into `constexpr` values in multiple stages, ultimately enabling the creation of a valid `std::string_view`.
+> The **Compile-Time Staging Strategy (CTSS)** provides an elegant solution to this problem. It allows us to transform intermediate results   into `constexpr` values in multiple stages, ultimately enabling the creation of a valid `std::string_view`.
+  {: .prompt-info }
 
 ## The Compile-Time Staging Strategy (CTSS)
 
@@ -113,9 +114,9 @@ consteval auto int_to_string_view() {
 
 1. Declare the `rightsize_buffer` array as `static constexpr`[^2].
 
-2. Declare `rightsize_buffer` as `constexpr` and **make the array indirectly `static`** by passing it to the helper function `to_static`. By passing the `constexpr` array as a **Non-Type Template Parameter (NTTP)**, the array is placed in **`static` storage**, and `to_static` simply returns a reference to this memory.
+2. Declare `rightsize_buffer` as `constexpr` and **make the array indirectly `static`** by passing it to the helper function `to_static`. By passing the `constexpr` array as a **Non-Type Template Parameter (NTTP)**, the array is placed in `static` storage, and `to_static` simply returns a reference to this memory.
 
-In both cases, the `rightsize_buffer` array must be declared as `constexpr`. However, **directly declaring it as `constexpr` is not possible**, as the subsequent copy operation would otherwise fail.
+In both cases, the `rightsize_buffer` array must be declared as `constexpr`. However, directly declaring it as `constexpr` is not possible, as the subsequent copy operation would otherwise fail.
 
 Once again, we face the challenge of a non-`constexpr` variable that needs to become `constexpr` later in the program.
 
@@ -191,11 +192,9 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     * Enumerations (`enum` and `enum class`)
     * `Pointer` types to literal types, including `const` and `nullptr_t` pointers
     * `Pointers to members` of literal types
-    * `Literal classes`[^2]
+    * `Literal classes`[^3]
 
-[^2]: **`static constexpr` inside `consteval` functions**
-      
-      Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context. However, we do not use this approach        because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions.
+[^2]: Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context. However, we do not use this approach        because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions.
 
 [^3]: **Requirements for a class to be a `literal class`**
 
@@ -208,7 +207,7 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     * `Virtual` functions are allowed, but `pure virtual` functions are not.
     * `Private` and `protected` member functions are allowed.
     * `Private` and `protected` inheritance are allowed, but `virtual` inheritance is not.
-    * `Aggregate classes`[^3] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
+    * `Aggregate classes`[^4] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
     * `Static` member variables and functions are allowed if they are `constexpr` and of a literal type.
     * `Friend` functions are allowed inside literal classes.
     * Default arguments for constructors or functions must be `constant expressions`.
