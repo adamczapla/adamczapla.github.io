@@ -189,9 +189,7 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
 
 [^4]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. However, we do not use this approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions. 
 
-## Comments
-
-**Share your feedback – Praise or criticism is appreciated!**
+## Share your feedback – Praise or criticism is appreciated!
 
 <script src="https://giscus.app/client.js"
         data-repo="adamczapla/adamczapla.github.io"
@@ -209,4 +207,3 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
         crossorigin="anonymous"
         async>
 </script>
-    
