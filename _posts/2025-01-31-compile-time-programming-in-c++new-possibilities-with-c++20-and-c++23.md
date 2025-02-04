@@ -277,3 +277,25 @@ Especially in performance-critical applications, compile-time programming can pr
 ## Footnote
 
 {% include footnote-literal-types.md %}
+
+## Share your feedback
+
+### Praise or criticism is appreciated!
+
+<script src="https://giscus.app/client.js"
+        data-repo="adamczapla/adamczapla.github.io"
+        data-repo-id="R_kgDONv6EUg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONv6EUs4CmqH2"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
