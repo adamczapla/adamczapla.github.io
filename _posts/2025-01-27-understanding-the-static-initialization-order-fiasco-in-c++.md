@@ -109,6 +109,27 @@ Although compilers often perform compile-time initialization without these keywo
 
 Understanding the **Static Initialization Order Fiasco** not only helps avoid potential bugs but also highlights the importance of **explicit** initialization in C++ programming. By leveraging C++ features like `constexpr` and `constinit`, developers can ensure consistency and predictability in their applications.
 
+## Share your feedback
+
+### Praise or criticism is appreciated!
+
+<script src="https://giscus.app/client.js"
+        data-repo="adamczapla/adamczapla.github.io"
+        data-repo-id="R_kgDONv6EUg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONv6EUs4CmqH2"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
 ## Footnote
 
 [^1]: `Zero-initialization` depends on the data type and sets the value to a `null value` defined by the type:
