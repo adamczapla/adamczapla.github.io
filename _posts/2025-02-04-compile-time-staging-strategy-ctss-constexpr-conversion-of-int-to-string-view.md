@@ -235,7 +235,9 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     * Only `public` **non-static** members allowed OR
     * `Public` constructor required for `non-public` **non-static** members
 
-[^4]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. However, we do not use this   approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions. 
+[^4]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. 
+
+    However, we do not use this approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval`   functions. 
 
 
 
