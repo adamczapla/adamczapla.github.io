@@ -8,10 +8,6 @@ description: "A detailed exploration of 'if consteval' and its advantages over s
 
 ## Introduction
 
-Footnote.[^1]  
-
-Footnote.[^2]
-
 When working with `constexpr` and `consteval` in C++, developers may run into some limitations when attempting to evaluate conditions at compile-time. One common scenario is using `std::is_constant_evaluated()` to differentiate between compile-time and runtime code. However, there are cases where this approach fails due to how the compiler performs **static analysis**.
 
 In this post, we’ll explore how `if consteval` solves these issues, and why it is a better choice compared to `std::is_constant_evaluated()`.
@@ -77,12 +73,3 @@ Unlike an `if` clause, `if consteval` is a compile-time construct, just like `if
 ## Conclusion
 
 `std::is_constant_evaluated()` is useful for distinguishing between compile-time and runtime logic, but it is not suitable when working with `consteval` functions. The introduction of `if consteval` in C++ provides a cleaner and safer way to handle compile-time evaluation, ensuring that the compiler can confidently differentiate between branches.
-
-## Footnote
-
-{% include footnote-literal-types.md %}
-
-[^2]: Footnote in dieser Datei
-
-
-
