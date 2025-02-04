@@ -112,7 +112,7 @@ consteval auto int_to_string_view() {
 
 **Two Possible Solutions:**
 
-1. Declare the `rightsize_buffer` array as `static constexpr`[^2].
+1. Declare the `rightsize_buffer` array as `static constexpr`[^4].
 
 2. Declare `rightsize_buffer` as `constexpr` and **make the array indirectly `static`** by passing it to the helper function `to_static`. By passing the `constexpr` array as a **Non-Type Template Parameter (NTTP)**, the array is placed in `static` storage, and `to_static` simply returns a reference to this memory.
 
@@ -192,13 +192,9 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     * Enumerations (`enum` and `enum class`)
     * `Pointer` types to literal types, including `const` and `nullptr_t` pointers
     * `Pointers to members` of literal types
-    * `Literal classes`[^3]
+    * `Literal classes`[^2]
 
-[^2]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. 
-
-    However, we do not use this   approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions. 
-
-[^3]: **Requirements for a class to be a `literal class`**
+[^2]: **Requirements for a class to be a `literal class`**
 
     * All `non-static` members must be literals.
     * The class must have at least one user-defined `constexpr` constructor, or all `non-static` members must be initialized `in-class`.
@@ -209,7 +205,7 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     * `Virtual` functions are allowed, but `pure virtual` functions are not.
     * `Private` and `protected` member functions are allowed.
     * `Private` and `protected` inheritance are allowed, but `virtual` inheritance is not.
-    * `Aggregate classes`[^4] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
+    * `Aggregate classes`[^3] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
     * `Static` member variables and functions are allowed if they are `constexpr` and of a literal type.
     * `Friend` functions are allowed inside literal classes.
     * Default arguments for constructors or functions must be `constant expressions`.
@@ -217,7 +213,7 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     > A literal type ensures that objects of this type can be evaluated at compile time, as long as all dependent expressions are `constexpr`. 
     {: .prompt-info }
 
-[^4]: **Requirements for a class to be a `aggregate class`**
+[^3]: **Requirements for a class to be a `aggregate class`**
     
     1. **What is allowed:**
     * `Public` members
@@ -239,6 +235,7 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
     * Only `public` **non-static** members allowed OR
     * `Public` constructor required for `non-public` **non-static** members
 
+[^4]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. However, we do not use this   approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions. 
 
 
 
