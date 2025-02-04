@@ -73,3 +73,24 @@ Unlike an `if` clause, `if consteval` is a compile-time construct, just like `if
 ## Conclusion
 
 `std::is_constant_evaluated()` is useful for distinguishing between compile-time and runtime logic, but it is not suitable when working with `consteval` functions. The introduction of `if consteval` in C++ provides a cleaner and safer way to handle compile-time evaluation, ensuring that the compiler can confidently differentiate between branches.
+
+## Share your feedback
+
+### Praise or criticism is appreciated!
+
+<script src="https://giscus.app/client.js"
+        data-repo="adamczapla/adamczapla.github.io"
+        data-repo-id="R_kgDONv6EUg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONv6EUs4CmqH2"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
