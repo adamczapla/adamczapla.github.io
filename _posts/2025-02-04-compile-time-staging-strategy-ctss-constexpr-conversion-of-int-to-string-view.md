@@ -13,7 +13,7 @@ With the latest `constexpr` extensions in C++, we can perform more and more comp
 
 This is where the **Compile-Time Staging Strategy (CTSS)** comes into play. It allows us to make values `constexpr` in multiple stages.
 
-In this article, we will take a detailed look at how **CTSS** works, using the example of converting an `int` to a `std::string_view` at compile time.
+In this article, we will take a detailed look at how CTSS works, using the example of converting an `int` to a `std::string_view` at compile time.
 
 ## How Non-`constexpr` Values Can Become a Roadblock
 
@@ -34,4 +34,88 @@ consteval auto int_to_string_view() {
   std::array<char, right_size + 1> rightsize_buffer{}; // Error
   ...
 }
+
+constexpr auto str_view = int_to_string_view<32, [] { return calculation(42); }>();
 ```
+
+However, this step fails because the determined size (in our case, the variable `right_size`) is not a constant expression.
+
+The **Compile-Time Staging Strategy (CTSS)** provides an elegant solution to this problem. It allows us to transform intermediate results into `constexpr` values in multiple stages, ultimately enabling the creation of a valid `std::string_view`.
+
+## The Compile-Time Staging Strategy (CTSS)
+
+**The first step is done:** We have identified the problem. In our example, the `rightsize_buffer` array expects `right_size` to be a constant expression – but it isn't.
+
+To resolve this issue, we encapsulate the entire code up to the error inside a `constexpr` lambda and return all values that need to be `constexpr`. In our case, this is `right_size`. Additionally, we need to return the oversized array `oversized_buffer` so we can later trim it to the exact required size.
+
+```c++
+namespace rng = std::ranges;
+
+template <auto buffer_size, auto int_builder>
+consteval auto int_to_string_view() {
+  constexpr auto intermediate_result = [] { 
+    std::array<char, buffer_size> oversized_buffer{};
+    auto const result = std::to_chars(rng::begin(oversized_buffer),
+                                      rng::end(oversized_buffer),
+                                      int_builder());
+    auto const right_size = rng::distance(rng::cbegin(oversized_buffer),
+                                          result.ptr);
+    return std::pair{oversized_buffer, right_size};
+  }();
+  ...
+}
+```
+
+### Important Considerations:
+
+* All return values **must** be of `literal types`*, as only these can be used to initialize `constexpr` variables (such as `intermediate_result`).
+
+* The lambda **must not capture any non-`constexpr` values** from its surrounding scope, as that would make it non-evaluatable at compile time. Although this is not an issue in our example, it is a common source of errors in compile-time programming and should always be kept in mind.
+
+**With this, the first staging step is complete:** We now have the relevant values in a `constexpr`-compatible form and can proceed to the next step — adjusting the array size.
+
+## Adjusting the Array Size
+
+Creating an array with the exact required size is no longer an issue since we now have the precise size available as a `constexpr` value. We reserve an extra byte for the *null terminator* and copy all characters from the oversized array into the appropriately sized `rightsize_buffer` array.
+
+```c++
+namespace rng = std::ranges;
+
+template <auto value> consteval auto& to_static() { return value; }
+
+template <auto buffer_size, auto int_builder>
+consteval auto int_to_string_view() {
+  constexpr auto intermediate_result = [] { 
+    std::array<char, buffer_size> oversized_buffer{};
+    auto const result = std::to_chars(rng::begin(oversized_buffer),
+                                      rng::end(oversized_buffer),
+                                      int_builder());
+    auto const right_size = rng::distance(rng::cbegin(oversized_buffer),
+                                          result.ptr);
+    return std::pair{oversized_buffer, right_size};
+  }();
+
+  std::array<char, intermediate_result.second + 1> rightsize_buffer{};
+  rng::copy_n(rng::cbegin(intermediate_result.first),
+                          intermediate_result.second,
+                          rng::begin(rightsize_buffer));
+  rightsize_buffer[intermediate_result.second] = '\0';
+  return std::string_view{to_static<rightsize_buffer>()}; // Error
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
