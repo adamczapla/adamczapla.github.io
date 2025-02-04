@@ -18,7 +18,7 @@
     * `Virtual` functions are allowed, but `pure virtual` functions are not.
     * `Private` and `protected` member functions are allowed.
     * `Private` and `protected` inheritance are allowed, but `virtual` inheritance is not.
-    * `Aggregate classes`[^4] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
+    * `Aggregate classes`[^3] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
     * `Static` member variables and functions are allowed if they are `constexpr` and of a literal type.
     * `Friend` functions are allowed inside literal classes.
     * Default arguments for constructors or functions must be `constant expressions`.
