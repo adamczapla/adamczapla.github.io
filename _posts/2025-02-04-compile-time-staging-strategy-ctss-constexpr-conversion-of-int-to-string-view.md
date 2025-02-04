@@ -112,7 +112,7 @@ consteval auto int_to_string_view() {
 
 **Two Possible Solutions:**
 
-1. Declare the `rightsize_buffer` array as `static constexpr`[^4].
+1. Declare the `rightsize_buffer` array as `static constexpr`[^2].
 
 2. Declare `rightsize_buffer` as `constexpr` and **make the array indirectly `static`** by passing it to the helper function `to_static`. By passing the `constexpr` array as a **Non-Type Template Parameter (NTTP)**, the array is placed in `static` storage, and `to_static` simply returns a reference to this memory.
 
