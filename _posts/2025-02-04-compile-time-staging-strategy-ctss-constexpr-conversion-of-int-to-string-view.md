@@ -183,7 +183,15 @@ With this last step, the conversion is complete. We have successfully transforme
 
 The **Compile-Time Staging Strategy** is a useful technique for many scenarios where `constexpr` constraints in C++ seem to pose a challenge. It allows us to solve complex problems and unlocks new possibilities for optimized, efficient programs. With the continuous improvements in `C++20` and `C++23`, compile-time programming is becoming increasingly powerful—and strategies like **CTSS help us** make the most of it.
 
+## Footnote
+
+{% include footnote-literal-types.md %}
+
+[^4]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. However, we do not use this approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions. 
+
 ## Comments
+
+**Share your feedback – Praise or criticism is appreciated!**
 
 <script src="https://giscus.app/client.js"
         data-repo="adamczapla/adamczapla.github.io"
@@ -201,11 +209,4 @@ The **Compile-Time Staging Strategy** is a useful technique for many scenarios w
         crossorigin="anonymous"
         async>
 </script>
-
-## Footnote
-
-{% include footnote-literal-types.md %}
-
-[^4]: **Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context**. However, we do not use this approach because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions. 
-
     
