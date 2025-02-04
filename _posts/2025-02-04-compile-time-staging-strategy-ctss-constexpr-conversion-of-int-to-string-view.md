@@ -71,7 +71,7 @@ consteval auto int_to_string_view() {
 
 **Important Considerations:**
 
-* All return values **must** be of `literal types`*, as only these can be used to initialize `constexpr` variables (such as `intermediate_result`).
+* All return values **must** be of `literal types`[^1], as only these can be used to initialize `constexpr` variables (such as `intermediate_result`).
 
 * The lambda **must not capture any non-`constexpr` values** from its surrounding scope, as that would make it non-evaluatable at compile time. Although this is not an issue in our example, it is a common source of errors in compile-time programming and should always be kept in mind.
 
@@ -111,7 +111,7 @@ consteval auto int_to_string_view() {
 
 **Two Possible Solutions:**
 
-1. Declare the `rightsize_buffer` array as `static constexpr`*.
+1. Declare the `rightsize_buffer` array as `static constexpr`[^2].
 
 2. Declare `rightsize_buffer` as `constexpr` and **make the array indirectly `static`** by passing it to the helper function `to_static`. By passing the `constexpr` array as a **Non-Type Template Parameter (NTTP)**, the array is placed in **`static` storage**, and `to_static` simply returns a reference to this memory.
 
@@ -155,12 +155,88 @@ consteval auto int_to_string_view() {
 }
 
 auto main() -> int {
-  constexpr auto str_view = int_to_string_view<32, [] { return calculation(42); }>();
+  constexpr auto str_view = int_to_string_view<32, [] {
+    return calculation(42);
+  }>();
   ...
 }
 ```
 
+Unlike the first staging step, this time **we capture an external variable** inside the lambda. However, this is completely safe because it only captures the `constexpr` variable `intermediate_result`. This ensures that the lambda remains `constexpr`-evaluatable, avoiding the previously mentioned pitfall.
 
+With this last step, the conversion is complete. We have successfully transformed an **`int`** into a `constexpr`-evaluatable **`std::string_view`** while ensuring that all required values are truly `constexpr`.
+
+## Summary of the Compile-Time Staging Strategy (CTSS)
+
+1. **Identify the error** – Analyze which variable is not `constexpr` but needs to be.
+
+2. **Encapsulate code** – Extract the affected code into a `constexpr` lambda that returns the necessary values.
+
+3. **Watch for pitfalls** – Ensure that no non-`constexpr` values are captured and that only `literal types` are returned.
+
+4. **Store values in `constexpr` variables** – Use the returned values to initialize `constexpr` variables.
+
+5. **Final processing** – Use the now `constexpr`-compatible values for the actual computation, such as creating a `std::string_view`.
+
+## Conclusion
+
+The **Compile-Time Staging Strategy** is a useful technique for many scenarios where `constexpr` constraints in C++ seem to pose a challenge. It allows us to solve complex problems and unlocks new possibilities for optimized, efficient programs. With the continuous improvements in `C++20` and `C++23`, compile-time programming is becoming increasingly powerful—and strategies like **CTSS help us** make the most of it.
+
+## Footnote
+
+[^1]: **What are Literal Types?**
+
+    A literal type in C++ is a type that can be used in a `constexpr` context, meaning inside `constant expressions`. This includes:
+    * Built-in types such as `int`, `char`, `double`, `bool`, and `nullptr_t`
+    * Enumerations (`enum` and `enum class`)
+    * `Pointer` types to literal types, including `const` and `nullptr_t` pointers
+    * `Pointers to members` of literal types
+    * `Literal classes`[^2]
+
+[^2]: **`static constexpr` inside `consteval` functions**
+      
+      Since C++23, it is allowed to declare variables as `static constexpr` in a `constexpr` context. However, we do not use this approach        because the Clang compiler currently has issues handling `static constexpr` inside `consteval` functions.
+
+[^3]: **Requirements for a class to be a `literal class`**
+
+    * All `non-static` members must be literals.
+    * The class must have at least one user-defined `constexpr` constructor, or all `non-static` members must be initialized `in-class`.
+    * `In-class` initializations for `non-static` members of `built-in` types must be `constant expressions`.
+    * `In-class` initializations for `non-static` members of class types must either use a user-defined `constexpr` constructor or have no     initializer. If no initializer is given, the default constructor of the class must be `constexpr`. Alternatively, all `non-static` members of the class must be initialized `in-class`.
+    * A `constexpr` constructor must initialize every member or at least those that are not initialized `in-class`.
+    * Virtual or normal default destructors are allowed, but user-defined destructors with {} are not allowed. User-defined     constructors with {} are allowed if they are declared as `constexpr`. However, user-defined `constexpr` destructors in literal classes are often of limited use because literal classes do not manage dynamic resources. In `non-literal` classes, however, they can be important, especially for properly deallocating dynamic resources in a `constexpr` context.
+    * `Virtual` functions are allowed, but `pure virtual` functions are not.
+    * `Private` and `protected` member functions are allowed.
+    * `Private` and `protected` inheritance are allowed, but `virtual` inheritance is not.
+    * `Aggregate classes`[^3] with only literal `non-static` members are also considered literal classes. This applies to all aggregate classes without a base class or if the base class is a literal class.
+    * `Static` member variables and functions are allowed if they are `constexpr` and of a literal type.
+    * `Friend` functions are allowed inside literal classes.
+    * Default arguments for constructors or functions must be `constant expressions`.
+    
+    > A literal type ensures that objects of this type can be evaluated at compile time, as long as all dependent expressions are `constexpr`. 
+    {: .prompt-info }
+
+[^4]: **Requirements for a class to be a `aggregate class`**
+    
+    1. **What is allowed:**
+    * `Public` members
+    * `User-declared` destructor
+    * `User-declared` copy and move assignment operators
+    * Members can be `not literals`
+    * `Public` inheritance
+     *  `Protected` or `private` **static** members
+    
+    2. **What is not allowed:**
+    * `Protected` and `private` **non-static** members
+    * `User-declared` constructors
+    * `Virtual` destructor
+    * `Virtual` member functions
+    * `Protected/private` or `virtual` inheritance
+    * Inherited constructors (by `using` declaration)
+    
+    3. **Restrictions for the base class:**
+    * Only `public` **non-static** members allowed OR
+    * `Public` constructor required for `non-public` **non-static** members
 
 
 
