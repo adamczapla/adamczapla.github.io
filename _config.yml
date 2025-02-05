@@ -170,7 +170,7 @@ collections:
   tabs:
     output: true
     sort_by: order
-  posts:
+  pages:
     output: true
 
 defaults:
