@@ -33,7 +33,8 @@ This website is hosted via GitHub Pages. When visiting the website, GitHub may a
 * Time and duration of visit
 * Possibly cookies for session management
 
-These data are processed and stored by GitHub. More information can be found in GitHub’s privacy policy:
+These data are processed and stored by GitHub. More information can be found in GitHub’s privacy policy: 
+[https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement "GitHub’s privacy policy").
 
 
 ## 4. Comments with Giscus & GitHub Discussions 
