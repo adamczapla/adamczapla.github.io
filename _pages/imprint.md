@@ -11,7 +11,7 @@ Brunnenstr. 13\
 45966 Gladbeck\
 Germany
                  
-Email:    adam@adamczapla.de 
+Email: [adam@adamczapla.de](mailto:adam@adamczapla.de) 
 
 ## Responsible for content according to §55 Abs. 2 RStV 
 
