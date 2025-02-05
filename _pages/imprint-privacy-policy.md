@@ -4,16 +4,14 @@ title: "Imprint & Privacy Policy"
 permalink: /imprint-privacy-policy/
 ---
 
-## Imprint
-### [Click <ins>here</ins> for `Imprint`](https://adamczapla.github.io/imprint/ "Imprint")
+* ## [View `Imprint`](https://adamczapla.github.io/imprint/ "Imprint")
 
-```
-https://adamczapla.github.io/imprint/
-```
+  ```
+  https://adamczapla.github.io/imprint/
+  ```
 
-## Privacy Policy
-### [Click <ins>here</ins> for `Privacy Policy`](https://adamczapla.github.io/privacy-policy/ "Privacy Policy")
+* ## [View `Privacy Policy`](https://adamczapla.github.io/privacy-policy/ "Privacy Policy")
 
-```
-https://adamczapla.github.io/privacy-policy/
-```
+  ```
+  https://adamczapla.github.io/privacy-policy/
+  ```
