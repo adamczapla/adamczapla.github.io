@@ -218,6 +218,7 @@ exclude:
   - purgecss.js
   - rollup.config.js
   - "package*.json"
+  - "assets/images/imprint*.svg"
 
 jekyll-archives:
   enabled: [categories, tags]
