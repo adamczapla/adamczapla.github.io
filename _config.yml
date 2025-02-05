@@ -34,7 +34,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Adam Czapla
+  name: Imprint & Privacy Policy
   email: adam@adamczapla.de # change to your email address
   links:
     # The first element serves as the copyright owner's link
@@ -44,14 +44,6 @@ social:
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
-
-footer:
-  text: "© 2025 Dein Name"
-  links:
-    - title: "Impressum"
-      url: "/impressum/"
-    - title: "Datenschutzerklärung"
-      url: "/datenschutzerklaerung/"
       
 # Site Verification Settings
 webmaster_verifications:
