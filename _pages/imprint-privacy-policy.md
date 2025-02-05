@@ -4,6 +4,16 @@ title: "Imprint & Privacy Policy"
 permalink: /imprint-privacy-policy/
 ---
 
-# Impressum
+## Imprint
+### [Click <ins>here</ins> for `Imprint`](https://adamczapla.github.io/imprint/ "Imprint")
 
-Hier steht dein Impressum-Text.
+```
+https://adamczapla.github.io/imprint/
+```
+
+## Privacy Policy
+### [Click <ins>here</ins> for `Privacy Policy`](https://adamczapla.github.io/privacy-policy/ "Privacy Policy")
+
+```
+https://adamczapla.github.io/privacy-policy/
+```
