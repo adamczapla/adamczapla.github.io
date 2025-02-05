@@ -45,6 +45,14 @@ social:
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
+footer:
+  text: "© 2025 Dein Name"
+  links:
+    - title: "Impressum"
+      url: "/impressum/"
+    - title: "Datenschutzerklärung"
+      url: "/datenschutzerklaerung/"
+      
 # Site Verification Settings
 webmaster_verifications:
   google: # fill in your Google verification code
