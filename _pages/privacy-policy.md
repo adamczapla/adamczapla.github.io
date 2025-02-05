@@ -13,7 +13,7 @@ Brunnenstr. 13\
 45966 Gladbeck\
 Germany
 
-Email: [adam@adamczapla.de](mailto:adam@adamczapla.de)
+[adam@adamczapla.de](mailto:adam@adamczapla.de)
 
 This privacy policy informs you about the processing of personal data when using this website.
 
