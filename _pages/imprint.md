@@ -8,4 +8,4 @@ permalink: /imprint/
 
 <span style="unicode-bidi: bidi-override; direction: rtl;">moc.niamod@eman</span>
 
-![Desktop View](/assets/imgages/imprint.svg){: width="700" height="400" }
+![Desktop View](/assets/images/imprint.svg){: width="400" }
