@@ -1,7 +1,7 @@
 ---
 title: "NTTP Compile-Time Builder Strategy - constexpr Conversion of 'std::vector to std::array'"
 categories: [C++, Compile-time programming]
-tags: [c++, c++20, constexpr, compile-time, array, vector, literal-type, lambda, conversion, staging, strategy, nttp, constant-expression]
+tags: [c++, c++20, constexpr, compile-time, builder, array, vector, literal-type, lambda, conversion, staging, strategy, nttp, constant-expression]
 description: "A deep dive into the 'NTTP Compile-Time Builder Strategy' for constexpr conversion of 'std::vector' to 'std::array' in C++."
 ---
 
@@ -92,13 +92,7 @@ These values — the temporary array and its actual size — are returned in a `
 
 The key limitation of `std::array` is that its **size must be known at compile time**. We can only create the final array once its exact size is available as a constant expression. To achieve this, the entire process is **wrapped** in a lambda function, a technique known as **Compile-Time Staging Strategy (CTSS)**.
 
-
-
-**→ For more details on CTSS:** 
-> [Compile-Time Staging Strategy (CTSS): constexpr Conversion of int to std::string_view](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/)
-  {: .prompt-info }
-
-> **→ For more details on CTSS:**
+> **For more details on CTSS:**
 > 
 > [Compile-Time Staging Strategy (CTSS): constexpr Conversion of int to std::string_view](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/)
   {: .prompt-info }
