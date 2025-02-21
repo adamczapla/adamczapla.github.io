@@ -7,7 +7,7 @@ description: "A deep dive into the 'NTTP Compile-Time Builder Strategy' for cons
 
 ## Introduction
 
-**Non-Type Template Parameters (NTTPs)** are a powerful feature of compile-time programming in C++. They allow values to be passed and processed at compile time. However, they come with a significant limitation: **only literal types are allowed**.
+Non-Type Template Parameters (NTTPs) are a powerful feature of compile-time programming in C++. They allow values to be passed and processed at compile time. However, they come with a significant limitation: **only literal types are allowed**.
 
 This means that many commonly used standard types, such as `std::string` or `std::vector`, **cannot be passed as NTTPs**. In many use cases, it would be beneficial to utilize dynamic or complex data types in a similar manner.
 
@@ -19,23 +19,37 @@ This article explains how this technique works and in which scenarios it can be 
 
 The NTTP Compile-Time Builder Strategy consists of the following steps:
 
-1. **Encapsulation of Value Creation in a Builder**
+**1. Encapsulation of Value Creation in a Builder**
 
 Instead of passing the value directly, we define a `constexpr` lambda function that generates and returns the desired value. This lambda acts as a **builder**, describing **how the value is created** without instantiating it immediately.
 
-code
+```c++
+constexpr auto str_builder = [] { return std::string{"Hello NTTP!"}; };  // Our Builder!
+```
 
-2. **Passing the Builder as an NTTP**
+**2. Passing the Builder as an NTTP**
 
 Since lambdas in C++ are implicitly `constexpr`, they can be passed as NTTPs. This allows non-literal types to be processed at compile time indirectly.
 
-code
+```c++
+constexpr auto str_builder = [] { return std::string{"Hello NTTP!"}; };
 
-3. **Generating the Value within the Function**
+auto main() -> int {
+  foo<str_builder>(); // Passing the Builder as an NTTP
+}
+```
+
+**3. Generating the Value within the Function**
 
 Inside the target function (`foo`), the builder is executed to generate the desired value at compile time.
 
-code
+```c++
+template <auto builder>
+auto foo() {
+  std::string str = builder(); // Generate the value using the builder
+  // Further processing...
+}
+```
 
 After explaining the fundamentals of the NTTP Compile-Time Builder Strategy, let’s look at a concrete use case.
 
@@ -43,7 +57,22 @@ After explaining the fundamentals of the NTTP Compile-Time Builder Strategy, let
 
 ### Implementation:
 
-code
+```c++
+template <size_t max_size, auto builder>
+constexpr auto to_array() noexcept {
+  namespace rng = std::ranges;
+  constexpr auto data = [] {
+    auto const int_vec = builder();
+    std::array<int, max_size> result{};
+    auto const end_pos = rng::copy(int_vec, rng::begin(result)).out;
+    auto const right_size = rng::distance(rng::begin(result), end_pos);
+    return std::pair{result, right_size};
+  }();
+  std::array<int, data.second> result{};
+  rng::copy_n(rng::begin(data.first), data.second, rng::begin(result));
+  return result;
+}
+```
 
 ### How Does the Conversion Work?
 
@@ -70,7 +99,16 @@ In the final step, the temporary oversized array is **trimmed to its actual size
 
 ### Usage Example:
 
-code 
+```c++
+constexpr auto vector_builder = [] {
+  std::vector<int> vec{0, 8, 15};
+  vec.push_back(50);
+  // Familiar handling of std::vector
+  return vec;
+};
+
+static constexpr auto arr = to_array<42, vector_builder>();
+```
 
 Now, the builder’s result is available as a `constexpr` value and can be further processed.
 
@@ -78,12 +116,12 @@ Now, the builder’s result is available as a `constexpr` value and can be furth
 
 Since C++20, many types that were previously restricted to runtime, including `std::vector`, can now be used in `constexpr` contexts — even though they involve dynamic memory management. This makes it possible to work with `std::vector` at compile-time just as flexibly as at runtime.
 
-**The advantages are clear:**
+The advantages are clear:
 
 * **Dynamic memory management** → Elements can be added or removed dynamically.
 * **Flexibility** → The number of elements does not need to be known in advance.
 
-**However, there is a critical limitation:**
+However, there is a critical limitation:
 
 Dynamically allocated memory **must** also be deallocated at compile-time. This means that `std::vector` cannot retain its values beyond compile-time, as its allocated memory is freed once the `constexpr` execution is complete.
 
