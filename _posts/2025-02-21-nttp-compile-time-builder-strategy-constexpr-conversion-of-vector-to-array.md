@@ -95,7 +95,12 @@ The key limitation of `std::array` is that its **size must be known at compile t
 
 
 **→ For more details on CTSS:** 
-> [Compile-Time Staging Strategy (CTSS): constexpr Conversion of int to std::string_view]([https://duckduckgo.com](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/))
+> [Compile-Time Staging Strategy (CTSS): constexpr Conversion of int to std::string_view](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/)
+  {: .prompt-info }
+
+> **→ For more details on CTSS:**
+> 
+> [Compile-Time Staging Strategy (CTSS): constexpr Conversion of int to std::string_view](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/)
   {: .prompt-info }
 
 In the final step, the temporary oversized array is **trimmed** to its actual size and returned as a `constexpr` value.
