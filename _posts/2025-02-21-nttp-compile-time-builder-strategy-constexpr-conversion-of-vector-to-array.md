@@ -74,14 +74,36 @@ code
 
 Now, the builder’s result is available as a `constexpr` value and can be further processed.
 
+### When is such a conversion useful?
 
+Since C++20, many types that were previously restricted to runtime, including `std::vector`, can now be used in `constexpr` contexts — even though they involve dynamic memory management. This makes it possible to work with `std::vector` at compile-time just as flexibly as at runtime.
 
+**The advantages are clear:**
 
+* **Dynamic memory management** → Elements can be added or removed dynamically.
+* **Flexibility** → The number of elements does not need to be known in advance.
 
+**However, there is a critical limitation:**
 
+Dynamically allocated memory **must** also be deallocated at compile-time. This means that `std::vector` cannot retain its values beyond compile-time, as its allocated memory is freed once the `constexpr` execution is complete.
 
+To store values permanently in a compile-time data structure, we need to convert `std::vector` into an `std::array`.
 
+## When Is the NTTP Compile-Time Builder Strategy Necessary?
 
+The NTTP Compile-Time Builder Strategy is a powerful tool, but it is not always required. In some cases, a `std::vector` can simply be passed as a regular function argument without needing a builder.
+
+However, in this specific example, passing a `std::vector` as a function argument would not be possible because a non-`constexpr` reference to the `std::vector` inside the lambda function in `to_array` would not be allowed.
+
+This approach is particularly beneficial when combined with the **Compile-Time Staging Strategy (CTSS)**. Whenever the generated value needs to be used in a **context that initializes a `constexpr` variable**, the NTTP Compile-Time Builder Strategy fully demonstrates its advantages.
+
+## Conclusion
+
+This article has demonstrated how the NTTP Compile-Time Builder Strategy enables the use of **non-literal types** as NTTPs, allowing dynamic structures like `std::vector` to be utilized in **pure compile-time processing**.
+
+In combination with **Compile-Time Staging Strategy (CTSS)**, this technique provides a flexible and efficient way to manage complex data transformations at compile time, ensuring that dynamically generated values remain valid beyond their immediate execution scope.
+
+By leveraging this approach, C++ developers can further extend the possibilities of **constexpr programming**, making their code both **more efficient** and **more reliable**.
 
 
 
