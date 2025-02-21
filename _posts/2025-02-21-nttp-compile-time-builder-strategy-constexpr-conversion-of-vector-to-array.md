@@ -84,9 +84,9 @@ The second NTTP is the **builder**, which describes how the `std::vector` is cre
 
 Inside `to_array`, the builder executes to generate a `std::vector` at compile time.
 
-The contents of the vector are copied into an **oversized array** (`std::array<int, max_size>`), and the actual number of inserted elements is determined.
+The contents of the vector are copied into an **oversized array** (`std::array<int, max_size>`), and the exact number of copied elements is determined.
 
-These values — the temporary array and its actual size — are returned in a `std::pair`.
+These values — the temporary array and its corresponding element count — are returned in a `std::pair`.
 
 ### Why This Intermediate Step?
 
