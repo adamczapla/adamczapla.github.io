@@ -7,7 +7,7 @@ description: "A deep dive into the 'NTTP Compile-Time Builder Strategy' for cons
 
 ## Introduction
 
-Non-Type Template Parameters (NTTPs) are a powerful feature of compile-time programming in C++. They allow values to be passed and processed at compile time. However, they come with a significant limitation: **only literal types[^1] are allowed**.
+Non-Type Template Parameters (NTTPs) are a powerful feature of compile-time programming in C++. They allow values to be passed and processed at compile time. However, they come with a significant limitation: **only** literal types[^1] are allowed.
 
 This means that many commonly used standard types, such as `std::string` or `std::vector`, **cannot be passed as NTTPs**. In many use cases, it would be beneficial to utilize dynamic or complex data types in a similar manner.
 
