@@ -139,11 +139,11 @@ This approach is particularly beneficial when combined with the [Compile-Time St
 
 ## Conclusion
 
-This article has demonstrated how the NTTP Compile-Time Builder Strategy enables the use of **non-literal types** as NTTPs, allowing dynamic structures like `std::vector` to be utilized in **pure compile-time processing**.
+This article has demonstrated how the NTTP Compile-Time Builder Strategy enables the use of **non-literal types** as NTTPs, allowing dynamic structures like `std::vector` to be utilized in pure compile-time processing.
 
 In combination with [Compile-Time Staging Strategy (CTSS)](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/), this technique provides a flexible and efficient way to manage complex data transformations at compile time, ensuring that dynamically generated values remain valid beyond their immediate execution scope.
 
-By leveraging this approach, C++ developers can further extend the possibilities of **constexpr programming**, making their code both **more efficient** and **more reliable**.
+By leveraging this approach, C++ developers can further extend the possibilities of constexpr programming, making their code both **more efficient** and **more reliable**.
 
 
 ## Share your feedback
