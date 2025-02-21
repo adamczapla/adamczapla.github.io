@@ -135,13 +135,13 @@ The NTTP Compile-Time Builder Strategy is a powerful tool, but it is not always 
 
 However, in this specific example, passing a `std::vector` as a function argument would not be possible because the lambda inside `to_array` would need to capture it by reference. Since function parameters are never `constexpr`, capturing a reference to the `std::vector` would create a non-`constexpr` reference, which is not allowed inside a `constexpr` function.
 
-This approach is particularly beneficial when combined with the **Compile-Time Staging Strategy (CTSS)**. Whenever the generated value needs to be used in a **context that initializes a `constexpr` variable**, the NTTP Compile-Time Builder Strategy fully demonstrates its advantages.
+This approach is particularly beneficial when combined with the [Compile-Time Staging Strategy (CTSS)](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/). Whenever the generated value needs to be used in a **context that initializes a `constexpr` variable**, the NTTP Compile-Time Builder Strategy fully demonstrates its advantages.
 
 ## Conclusion
 
 This article has demonstrated how the NTTP Compile-Time Builder Strategy enables the use of **non-literal types** as NTTPs, allowing dynamic structures like `std::vector` to be utilized in **pure compile-time processing**.
 
-In combination with **Compile-Time Staging Strategy (CTSS)**, this technique provides a flexible and efficient way to manage complex data transformations at compile time, ensuring that dynamically generated values remain valid beyond their immediate execution scope.
+In combination with [Compile-Time Staging Strategy (CTSS)](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/), this technique provides a flexible and efficient way to manage complex data transformations at compile time, ensuring that dynamically generated values remain valid beyond their immediate execution scope.
 
 By leveraging this approach, C++ developers can further extend the possibilities of **constexpr programming**, making their code both **more efficient** and **more reliable**.
 
