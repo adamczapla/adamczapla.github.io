@@ -7,7 +7,7 @@ description: "A deep dive into the 'NTTP Compile-Time Builder Strategy' for cons
 
 ## Introduction
 
-Non-Type Template Parameters (NTTPs) are a powerful feature of compile-time programming in C++. They allow values to be passed and processed at compile time. However, they come with a significant limitation: **only literal types are allowed**.
+Non-Type Template Parameters (NTTPs) are a powerful feature of compile-time programming in C++. They allow values to be passed and processed at compile time. However, they come with a significant limitation: **only literal types[^1] are allowed**.
 
 This means that many commonly used standard types, such as `std::string` or `std::vector`, **cannot be passed as NTTPs**. In many use cases, it would be beneficial to utilize dynamic or complex data types in a similar manner.
 
@@ -94,9 +94,9 @@ The key limitation of `std::array` is that its **size must be known at compile t
 
 
 
-> **→ For more details on CTSS:**
+>     **→ For more details on CTSS:**
 > 
-> [Compile-Time Staging Strategy (CTSS): `constexpr` Conversion of `int` to `std::string_view`]([https://duckduckgo.com](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/))
+>     [Compile-Time Staging Strategy (CTSS): constexpr Conversion of int to std::string_view]([https://duckduckgo.com](https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/))
   {: .prompt-info }
 
 In the final step, the temporary oversized array is **trimmed** to its actual size and returned as a `constexpr` value.
@@ -148,4 +148,28 @@ In combination with **Compile-Time Staging Strategy (CTSS)**, this technique pro
 By leveraging this approach, C++ developers can further extend the possibilities of **constexpr programming**, making their code both **more efficient** and **more reliable**.
 
 
+## Share your feedback
+
+### Praise or criticism is appreciated!
+
+<script src="https://giscus.app/client.js"
+        data-repo="adamczapla/adamczapla.github.io"
+        data-repo-id="R_kgDONv6EUg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONv6EUs4CmqH2"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+## Footnote
+
+{% include footnote-literal-types.md %}
 
