@@ -24,7 +24,7 @@ The NTTP Compile-Time Builder Strategy consists of the following steps:
 Instead of passing the value directly, we define a `constexpr` lambda function that generates and returns the desired value. This lambda acts as a **builder**, describing **how the value is created** without instantiating it immediately.
 
 ```c++
-constexpr auto str_builder = [] { return std::string{"Hello NTTP!"}; };  // Our Builder!
+constexpr auto str_builder = [] { return std::string{"Hello NTTP!"}; };
 ```
 
 **2. Passing the Builder as an NTTP**
@@ -35,17 +35,17 @@ Since lambdas in C++ are implicitly `constexpr`, they can be passed as NTTPs. Th
 constexpr auto str_builder = [] { return std::string{"Hello NTTP!"}; };
 
 auto main() -> int {
-  foo<str_builder>(); // Passing the Builder as an NTTP
+  process_string<str_builder>(); // Passing the Builder as an NTTP
 }
 ```
 
 **3. Generating the Value within the Function**
 
-Inside the target function (`foo`), the builder is executed to generate the desired value at compile time.
+Inside the target function (`process_string`), the builder is executed to generate the desired value at compile time.
 
 ```c++
 template <auto builder>
-auto foo() {
+auto process_string() {
   std::string str = builder(); // Generate the value using the builder
   // Further processing...
 }
@@ -86,7 +86,7 @@ Inside `to_array`, the builder executes to generate a `std::vector` at compile t
 
 The contents of the vector are copied into an **oversized array** (`std::array<int, max_size>`), and the actual number of inserted elements is determined.
 
-These values—the temporary array and its actual size—are returned in a `std::pair`.
+These values — the temporary array and its actual size — are returned in a `std::pair`.
 
 ### Why This Intermediate Step?
 
@@ -95,7 +95,7 @@ The key limitation of `std::array` is that its **size must be known at compile t
 **-> For more details on CTSS:**
 Compile-Time Staging Strategy (CTSS): `constexpr` Conversion of `int` to `std::string_view`
 
-In the final step, the temporary oversized array is **trimmed to its actual size** and returned as a `constexpr` value.
+In the final step, the temporary oversized array is **trimmed** to its actual size and returned as a `constexpr` value.
 
 ### Usage Example:
 
