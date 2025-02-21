@@ -76,7 +76,7 @@ constexpr auto to_array() noexcept {
 
 ### How Does the Conversion Work?
 
-The to_array function applies the **NTTP Compile-Time Builder Strategy** to transform a `std::vector<int>` into a `std::array<int, N>` at compile time.
+The `to_array` function applies the **NTTP Compile-Time Builder Strategy** to transform a `std::vector<int>` into a `std::array<int, N>` at compile time.
 
 The first NTTP defines the size of the array. This size is not automatically derived but must be explicitly passed at the function call. It must be large enough to hold the entire contents of the `std::vector`. The size cannot be inferred from `std::vector` because `std::array` requires a constant expression for its size.
 
@@ -133,7 +133,7 @@ To store values permanently in a compile-time data structure, we need to convert
 
 The NTTP Compile-Time Builder Strategy is a powerful tool, but it is not always required. In some cases, a `std::vector` can simply be passed as a regular function argument without needing a builder.
 
-However, in this specific example, passing a `std::vector` as a function argument would not be possible because a non-`constexpr` reference to the `std::vector` inside the lambda function in `to_array` would not be allowed.
+However, in this specific example, passing a `std::vector` as a function argument would not be possible because the lambda inside `to_array` would need to capture it by reference. Since function parameters are never `constexpr`, capturing a reference to the `std::vector` would create a non-`constexpr` reference, which is not allowed inside a `constexpr` function.
 
 This approach is particularly beneficial when combined with the **Compile-Time Staging Strategy (CTSS)**. Whenever the generated value needs to be used in a **context that initializes a `constexpr` variable**, the NTTP Compile-Time Builder Strategy fully demonstrates its advantages.
 
