@@ -25,7 +25,7 @@ To illustrate how `tuple_for_each` works, consider the following simple example:
 
 ```c++
 std::tuple values{42, 3.14, "Hello"};
-tuple_for_each(values, [](const auto& value) {
+tuple_for_each(values, [](auto const& value) {
   std::cout << value << '\n';
 });
 ```
