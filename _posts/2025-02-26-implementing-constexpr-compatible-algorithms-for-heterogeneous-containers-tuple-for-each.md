@@ -58,7 +58,7 @@ This flexibility ensures that the function supports a wide range of use cases wi
 
 The action is **passed by value** since it is typically a **stateless lambda** or **functor**, which requires only `1 byte` of storage. Passing it by reference would generally be less efficient, consuming at least `4 or 8 bytes`.
 
-## Iterating Over Tuple Elements with std::apply and Fold Expressions
+## Iterating Over Tuple Elements with `std::apply` and Fold Expressions
 
 Heterogeneous containers like `std::tuple` do not support classical iteration with loops or iterators, unlike homogeneous containers such as std::vector. To iterate over all tuple values, they must be made available as a **parameter pack**.
 
