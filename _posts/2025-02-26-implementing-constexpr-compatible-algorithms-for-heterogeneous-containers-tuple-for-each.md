@@ -36,7 +36,7 @@ tuple_for_each(values, [](auto const& value) {
 Hello
 ```
 
-Here, tuple_for_each invokes the provided action on each element within the `std::tuple`, similar to `std::for_each` for homogeneous containers.
+Here, `tuple_for_each` invokes the provided action on each element within the `std::tuple`, similar to `std::for_each` for homogeneous containers.
 
 > `tuple_for_each` is **not limited to runtime execution**; it is specifically designed to be used in compile-time programming as well.
   {: .prompt-info }
