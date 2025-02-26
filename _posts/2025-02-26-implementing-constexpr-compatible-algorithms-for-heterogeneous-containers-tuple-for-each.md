@@ -2,7 +2,7 @@
 title: "Implementing constexpr-Compatible Algorithms for Heterogeneous Containers – Part 1: 'tuple_for_each'"
 categories: [Algorithms for Heterogeneous Containers, Compile-time programming]
 tags: [c++, constexpr, compile-time, lambda, nttp, tuple, std-tuple, algorithms, heterogeneous-containers, tuple-for-each, std-apply, perfect-forwarding, fold-expressions, parameter-pack, variadic-template, forwarding-reference, comma-operator, if-constexpr, std-invoke, value-category, static_assert]
-description: "..."
+description: "A comprehensive guide to implementing 'tuple_for_each' for heterogeneous containers using modern C++"
 ---
 
 ## Introduction
@@ -24,9 +24,16 @@ We start with the simplest operation: **iterating over an `std::tuple`**. This f
 To illustrate how `tuple_for_each` works, consider the following simple example:
 
 ```c++
+std::tuple values{42, 3.14, "Hello"};
+tuple_for_each(values, [](const auto& value) {
+  std::cout << value << '\n';
+});
 ```
 
 ```Output
+42
+3.14
+Hello
 ```
 
 Here, tuple_for_each invokes the provided action on each element within the `std::tuple`, similar to `std::for_each` for homogeneous containers.
@@ -39,6 +46,10 @@ Here, tuple_for_each invokes the provided action on each element within the `std
 The heterogeneous container is passed as a **forwarding reference** (`tuple_t&&`), allowing **perfect forwarding** to preserve the **value category** of both the `std::tuple` and its elements.
 
 ```c++
+template <typename tuple_t, typename action_t>
+constexpr auto tuple_for_each(tuple_t&& tuple, action_t action) noexcept {
+  ...
+}
 ```
 
 If the original `std::tuple` was **modifiable**, it remains so within the action. Conversely, if the original `std::tuple` was **immutable**, that restriction is also enforced within the action.
@@ -54,6 +65,9 @@ Heterogeneous containers like `std::tuple` do not support classical iteration wi
 To achieve this, the processing code is encapsulated in a **lambda function**, which is then forwarded along with the `std::tuple` to `std::apply`:
 
 ```c++
+std::apply([](auto&&... tuple_values) {
+  // Access to all elements in the tuple
+}, std::forward<tuple_t>(tuple));
 ```
 
 `std::apply` extracts the elements from the `std::tuple` and passes them as arguments to the lambda function. The **variadic template with forwarding references** (`auto&&... tuple_values`) ensures that the elements are available as a **parameter pack** for subsequent iteration.
@@ -61,11 +75,17 @@ To achieve this, the processing code is encapsulated in a **lambda function**, w
 The actual **iteration over the elements** is performed using a **fold expression with the comma operator**:
 
 ```c++
+(call_action(std::forward<decltype(tuple_values)>(tuple_values)), ...);
 ```
 
 This fold expression invokes `call_action` for each element in the parameter pack.
 
 ```c++
+auto call_action = [&](auto&& tuple_value) {
+  if constexpr (std::invocable<action_t, decltype(tuple_value)>) {
+    std::invoke(action, std::forward<decltype(tuple_value)>(tuple_value));
+  }
+};
 ```
 
 The `if constexpr` condition checks whether the action can be invoked with the current element (`std::invocable`). If the condition is met, `std::invoke` is used to execute the action on the tuple element.
@@ -87,6 +107,19 @@ However, in some cases, it may be required that the action be **compatible with 
 Strict mode is enabled using a **boolean non-type template parameter (NTTP)**:
 
 ```c++
+template <bool strict = false, typename tuple_t, typename action_t>
+constexpr auto tuple_for_each(tuple_t&& tuple, action_t action) noexcept {
+  std::apply([&](auto&&... tuple_values) {
+    static_assert(!strict || ((std::invocable<action_t, decltype(tuple_values)>) && ...),
+      "Error: In strict mode, the action must be callable with every element in the tuple.");
+    auto call_action = [&](auto&& tuple_value) {
+      if constexpr (std::invocable<action_t, decltype(tuple_value)>) {
+        std::invoke(action, std::forward<decltype(tuple_value)>(tuple_value));
+      } 
+    };
+    (call_action(std::forward<decltype(tuple_values)>(tuple_values)), ...);    
+  }, std::forward<tuple_t>(tuple));
+}
 ```
 
 ### How It Works
@@ -101,9 +134,13 @@ Strict mode **must be configured at compile time** since it is evaluated inside 
 ### Example: Enforcing Strict Mode
 
 ```c++
+std::tuple values{42, 3.14, "Hello"};
+tuple_for_each<true>(values, [](int value) {
+  std::cout << value << '\n';
+});
 ```
 
-Since `3.14` (`double`) and `"Hello"` (`char const[6]`) are incompatible with `int`, compilation fails.
+Since `"Hello"` (`char const[6]`) is incompatible with `int`, compilation fails.
 
 ## Conclusion
 
