@@ -29,9 +29,8 @@ tuple_for_each(values, [](const auto& value) {
   std::cout << value << '\n';
 });
 ```
-
-``` Output
 **Output:**
+```
 42
 3.14
 Hello
