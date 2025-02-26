@@ -152,9 +152,23 @@ With `tuple_for_each`, we have developed an algorithm that enables iteration ove
 
 **Next:** The next article explores `tuple_find`, a constexpr-capable function for searching values in `std::tuple`, which presents additional challenges and solutions.
 
+## Share your feedback
 
+### Praise or criticism is appreciated!
 
-
-
-
-
+<script src="https://giscus.app/client.js"
+        data-repo="adamczapla/adamczapla.github.io"
+        data-repo-id="R_kgDONv6EUg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONv6EUs4CmqH2"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
