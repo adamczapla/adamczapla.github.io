@@ -30,7 +30,8 @@ tuple_for_each(values, [](const auto& value) {
 });
 ```
 
-```
+``` Output
+**Output:**
 42
 3.14
 Hello
@@ -102,7 +103,7 @@ A normal `if` statement would **not work** in this case because it is a **runtim
 
 By default, `tuple_for_each` is designed to **skip elements that are not compatible** with the provided action. If the action cannot be invoked with a specific element type, that element is simply ignored.
 
-However, in some cases, it may be required that the action be **compatible with every element in the tuple**. This is where the **strict mode** comes into play.
+However, in some cases, it may be required that the action be **compatible with every element** in the tuple. This is where the **strict mode** comes into play.
 
 Strict mode is enabled using a **boolean non-type template parameter (NTTP)**:
 
