@@ -3,6 +3,7 @@ title: "Implementing Constexpr-Compatible Algorithms for Heterogeneous Container
 categories: [Compile-time programming, Algorithms for Heterogeneous Containers]
 tags: [c++, constexpr, compile-time, lambda, nttp, tuple, std-tuple, algorithms, heterogeneous-containers, tuple-for-each, std-apply, perfect-forwarding, fold-expressions, parameter-pack, variadic-template, forwarding-reference, comma-operator, if-constexpr, std-invoke, value-category, static_assert]
 description: "A comprehensive guide to implementing the constexpr-compatible algorithm 'tuple_for_each' for heterogeneous containers using modern C++."
+image: /assets/images/strictmode.png
 ---
 
 ## Introduction
