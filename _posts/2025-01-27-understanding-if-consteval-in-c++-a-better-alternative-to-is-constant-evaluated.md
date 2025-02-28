@@ -4,6 +4,7 @@ date: 27-01-2025 12:00:00 +0100
 categories: [C++, Compile-time programming]
 tags: [c++, c++23, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions]
 description: "A detailed exploration of 'if consteval' and its advantages over std::is_constant_evaluated() in C++."
+image: /assets/images/consteval.png
 ---
 
 ## Introduction
