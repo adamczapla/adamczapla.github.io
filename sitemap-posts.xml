@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/</loc>
+        <lastmod>2025-02-27</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://adamczapla.github.io/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/</loc>
+        <lastmod>2025-02-27</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/</loc>
+        <lastmod>2025-02-27</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/</loc>
+        <lastmod>2025-02-27</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://adamczapla.github.io/posts/understanding-the-static-initialization-order-fiasco-in-c++/</loc>
+        <lastmod>2025-02-27</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://adamczapla.github.io/posts/understanding-if-consteval-in-c++-a-better-alternative-to-is-constant-evaluated/</loc>
+        <lastmod>2025-02-27</lastmod>
+        <priority>0.80</priority>
+    </url>
+</urlset>
