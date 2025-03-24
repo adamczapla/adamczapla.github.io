@@ -16,3 +16,54 @@ The algorithm `tuple_find` looks for the **first element** in the tuple that mat
 At the same time, it takes into account whether the found element is a `const` or a **modifiable reference**. To represent this difference, the result is wrapped in a `std::variant`. Combined with `std::optional`, this also indicates whether a **matching element** was found at all.
 
 Unlike standard search functions, `tuple_find` must handle some specific challenges related to **type safety** and **reference semantics** in C++. These challenges and the resulting **design decisions** are the main focus of this article.
+
+## Iteration with Index: Accessing Elements and Positions
+
+As already shown in `tuple_for_each`, iterating over a `std::tuple` requires a **parameter pack**. This is achieved by combining `std::apply` with a **lambda function using variadic template parameters**:
+
+```c++
+template <typename tuple_t, std::equality_comparable value_t>
+constexpr auto tuple_find(tuple_t&& tuple, value_t const& value, size_t index = 0) noexcept {
+  ...
+  return std::apply([&](auto&&... tuple_values) {
+    ...
+  }, std::forward<tuple_t>(tuple));
+  ...
+}
+```
+
+> **Note:** This technique for unpacking a tuple using `std::apply` and variadic lambdas is explained in detail in [Part 1 of this series](https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/).
+  {: .prompt-info }
+
+However, for `tuple_find`, accessing the elements alone is not enough — we also need to know the **position** of each element within the tuple. 
+
+This is essential to **resume the search** from a given point or to **return the position** of a match.
+
+To achieve this, we use `std::make_index_sequence<N>`, where `N` is the number of elements in the tuple:
+
+```c++
+std::make_index_sequence<std::tuple_size<std::remove_cvref_t<tuple_t>>{}>{}
+```
+
+This creates an object of type `std::index_sequence<0, 1, 2, ..., N-1>` at compile time. We then pass it to a **lambda function with a deducible variadic template parameter** for the indices:
+
+```c++
+[&]<size_t... idx>(std::index_sequence<idx...>) {
+  // Access to the indices: idx...
+}
+```
+
+The indices `idx...` are **automatically deduced** from the `std::index_sequence` object during the call. Inside the lambda, they are available as a **parameter pack** — synchronized with the parameter pack of the tuple values.
+
+This creates an **explicit mapping** between each individual **tuple element and its position** - the foundation for further processing:
+
+```c++
+template <typename tuple_t, std::equality_comparable value_t>
+constexpr auto tuple_find(tuple_t&& tuple, value_t const& value, size_t index = 0) noexcept {
+  return [&]<size_t... idx>(std::index_sequence<idx...>) {
+    return std::apply([&](auto&&... tuple_values) {
+      ...
+    }, std::forward<tuple_t>(tuple));
+  }(std::make_index_sequence<std::tuple_size<std::remove_cvref_t<tuple_t>>{}>{});
+}
+```
