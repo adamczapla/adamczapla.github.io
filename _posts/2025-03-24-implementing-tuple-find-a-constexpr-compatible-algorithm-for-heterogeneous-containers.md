@@ -248,5 +248,43 @@ if (result) {
 const: 10
 ```
 
+## Conclusion
 
+`tuple_find` is specifically designed for **heterogeneous containers** like `std::tuple` and introduces several characteristics that arise from C++'s **type system** and **reference semantics**:
 
+* Only elements whose type exactly matches the search value are considered. A search for `int` will **not** find a `double`, even if an implicit conversion would be allowed.
+
+* The return type is a `std::variant` that contains either a const or **non**-`const` **reference**. This means the user must **know which variant** was returned in order to access it safely.
+
+* A more generic version based on concepts like `std::equality_comparable_with` or `std::convertible_to` is not possible, since the reference type must be **fully defined before the iteration starts**. This is a limitation of using **fold expressions**, which cannot be short-circuited.
+
+Despite these limitations, `tuple_find` offers clear advantages:
+
+* The algorithm is fully `constexpr`-**compatible**
+  
+* It allows **direct reference access** to found elements
+  
+* It supports **multiple matches** using a start index
+  
+Together, these features provide a precise and modern solution for working with `std::tuple`, addressing common real-world problems **without sacrificing clarity or performance**.
+
+## Share your feedback
+
+### Praise or criticism is appreciated!
+
+<script src="https://giscus.app/client.js"
+        data-repo="adamczapla/adamczapla.github.io"
+        data-repo-id="R_kgDONv6EUg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDONv6EUs4CmqH2"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
