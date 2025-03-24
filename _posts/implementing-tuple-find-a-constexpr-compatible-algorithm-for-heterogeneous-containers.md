@@ -67,3 +67,21 @@ constexpr auto tuple_find(tuple_t&& tuple, value_t const& value, size_t index = 
   }(std::make_index_sequence<std::tuple_size<std::remove_cvref_t<tuple_t>>{}>{});
 }
 ```
+
+## Ensuring Reference Validity
+
+Since `tuple_find` returns a **reference to the found element**, it must be ensured that this reference remains valid after the function call. A `static_assert` checks that all elements of the given tuple are **Lvalue references**:
+
+```c++
+static_assert(((std::is_lvalue_reference_v<decltype(tuple_values)>) && ...),
+  "Error: All tuple elements must be lvalue references to ensure that returned "
+  "references remain valid.");
+```
+
+This prevents returning references to **temporary objects**. A typical example of such an error is caught at **compile time**:
+
+```c++
+auto& result = tuple_find(std::tuple{5.5, 10, "str", 20, 'c', 5, 10, 10.0}, 10);
+```
+
+In this case, `result` **would be a dangling reference**, since the temporary `std::tuple` — and all its elements — are destroyed immediately after the function call.
