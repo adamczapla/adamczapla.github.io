@@ -9,7 +9,7 @@ description: "A detailed guide to implementing the constexpr-compatible search a
 
 In the [first part](https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/) of this article series, an algorithm called `tuple_for_each` was introduced, enabling iteration over all elements of a `std::tuple` and applying an action to each one - without relying on classic loops or iterators. Based on that foundation, this second article covers another common use case for heterogeneous containers: **searching for a specific value**.
 
-In standard containers like `std::vector`, this task is typically solved using std::find or `std::ranges::find`. For `std::tuple`, however, no such equivalent exists. This article **closes that gap** by explaining step by step how such a function can be implemented.
+In standard containers like `std::vector`, this task is typically solved using `std::find` or `std::ranges::find`. For `std::tuple`, however, no such equivalent exists. This article **closes that gap** by explaining step by step how such a function can be implemented.
 
 The algorithm `tuple_find` looks for the **first element** in the tuple that matches a given value. It returns a **reference** to that element along with its **position**. The returned position allows the search to continue at that exact point in a later call, so additional matches can be found.
 
