@@ -85,3 +85,24 @@ auto& result = tuple_find(std::tuple{5.5, 10, "str", 20, 'c', 5, 10, 10.0}, 10);
 ```
 
 In this case, `result` **would be a dangling reference**, since the temporary `std::tuple` — and all its elements — are destroyed immediately after the function call.
+
+## Reference Types and Return Value
+
+Since `tuple_find` returns a reference to the matched element, it's important to distinguish whether this reference is `const` or **modifiable**. However, this information is only available **at the time a match is found**.
+
+The search itself takes place - just like in `tuple_for_each` - **inside a fold expression using the comma operator**. Such an expansion **cannot be exited early**. Therefore, any potential match must be **stored immediately in a suitable data structure**, even though the fold expression continues afterward.
+
+This requirement makes it necessary to **fully declare the return type before the search begins**. Since the reference type (`const` or not) is still unknown at this point, we use `std::variant` to store either a `const` or non-`const` reference. To additionally signal whether a match was found, `std::variant` is combined with `std::optional`:
+
+```c++
+std::optional<std::variant<non_const_result, const_result>>
+```
+
+The reference is stored using `std::reference_wrapper`, because a `std::pair` does not allow assignment when one of its elements is of type `const&`. **Such an assignment is required inside the fold expression.** `std::reference_wrapper` circumvents this limitation and makes the assignment possible.
+
+
+
+
+
+
+
