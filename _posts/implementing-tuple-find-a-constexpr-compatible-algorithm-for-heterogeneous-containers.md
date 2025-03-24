@@ -140,10 +140,113 @@ if constexpr (std::is_const_v<std::remove_reference_t<decltype(tuple_values)>>) 
 
 This ensures that the return value reflects **both** the correct reference type (`const` or not) **and** the element’s position within the tuple.
 
+## Complete Function
 
+```c++
+template <typename tuple_t, std::equality_comparable value_t>
+constexpr auto tuple_find(tuple_t&& tuple, value_t const& value, size_t index = 0) noexcept {
+  return [&]<size_t... idx>(std::index_sequence<idx...>) {
+    return std::apply([&](auto&&... tuple_values) {
+      static_assert(((std::is_lvalue_reference_v<decltype(tuple_values)>) && ...) ,
+        "Error: All tuple elements must be lvalue references to ensure that returned "
+        "references remain valid.");
 
+      using non_const_result_t = std::pair<std::reference_wrapper<value_t>, size_t>;
+      using const_result_t = std::pair<std::reference_wrapper<std::add_const_t<value_t>>, size_t>;
+      using result_t = std::optional<std::variant<non_const_result_t, const_result_t>>;
+            
+      result_t result{};
 
+      ([&] {
+        if constexpr (std::is_same_v<std::remove_cvref_t<decltype(tuple_values)>, value_t>) {
+          if (!result && idx >= index && std::equal_to{}(value, tuple_values)) {
+            if constexpr (std::is_const_v<std::remove_reference_t<decltype(tuple_values)>>) {
+              result = result_t{std::in_place, const_result_t{tuple_values, idx}};
+            } else {
+              result = result_t{std::in_place, non_const_result_t{tuple_values, idx}};
+            }
+          }
+        }
+      }() , ...);
 
+      return result;
+    }, std::forward<tuple_t>(tuple));
+  }(std::make_index_sequence<std::tuple_size<std::remove_cvref_t<tuple_t>>{}>{});
+}
+```
+
+## Example Use Cases
+
+Now that the `tuple_find` function is fully implemented and all important design decisions have been discussed, the following examples illustrate its practical use. The examples cover both typical **runtime scenarios** and `constexpr` **use cases**.
+
+### 1. Search and Modify Values (Runtime)
+
+This example shows how to find multiple occurrences of a value in a `std::tuple` and modify them afterward. The return value is a **real reference** - any changes affect the underlying variables directly:
+
+```c++
+int a{20}, b{10}, c{10}, d{30};
+auto tpl = std::tie(a, b, c, d);
+
+size_t idx = 0;
+while (true) {
+  auto result = tuple_find(tpl, 10, idx);
+  if (!result) break;
+  auto& ref = std::get<0>(*result); // Access non-const reference
+  std::cout << "Found: " << ref.first << '\n';
+  ref.first += 100; // Modify
+  idx = ref.second + 1; // Continue search from next index
+}
+std::cout << "New values: b = " << b << ", c = " << c << '\n';
+```
+
+**Output:**
+
+```
+Found: 10  
+Found: 10  
+New values: b = 110, c = 110
+```
+
+### 2. `constexpr` Support
+
+Since `tuple_find` is fully `constexpr` - **compatible**, the search can also be executed at compile time. For example:
+
+```c++
+static constexpr int x{10}, y{20}, z{30};
+constexpr auto tpl = std::tie(x, y, z);
+constexpr auto result = tuple_find(tpl, 10);
+
+if constexpr (result) {
+  static_assert(std::get<1>(*result).second == 0); // Match at position 0
+}
+```
+
+This allows the function to be used inside `static_assert` or other `consteval` contexts.
+
+### 3. Reference Type Depends on Search Match
+
+The return type of `tuple_find` depends on the **first matching element**: If it is `const`, a `const` reference is returned—otherwise a modifiable one.
+
+```c++
+int modifiable{10};
+const int immutable{10};
+auto tpl = std::tie(immutable, modifiable);
+
+auto result = tuple_find(tpl, 10);
+if (result) {
+  if (auto ptr = std::get_if<0>(&*result)) {
+    std::cout << "non-const: " << ptr->first << '\n';
+  } else {
+    std::cout << "const: " << std::get<1>(*result).first << '\n';
+  }
+}
+```
+
+**Output:**
+
+```
+const: 10
+```
 
 
 
