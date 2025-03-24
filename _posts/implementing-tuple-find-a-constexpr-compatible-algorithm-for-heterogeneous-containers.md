@@ -100,6 +100,47 @@ std::optional<std::variant<non_const_result, const_result>>
 
 The reference is stored using `std::reference_wrapper`, because a `std::pair` does not allow assignment when one of its elements is of type `const&`. **Such an assignment is required inside the fold expression.** `std::reference_wrapper` circumvents this limitation and makes the assignment possible.
 
+## Fold Expression: Type Check and Comparison
+
+At the beginning of the fold expression, a **type check** is performed:
+
+```c++
+([&] {
+  if constexpr (std::is_same_v<std::remove_cvref_t<decltype(tuple_values)>, value_t>) {
+    // Comparison goes here
+  }
+}(), ...);
+```
+
+Only elements whose type **exactly matches** the type of the search value are included in the comparison. This restriction is a direct result of how the function is structured: the return type must be defined **before** the iteration over the tuple begins.
+
+Since the function returns a **reference** to the found element, an exact type match is required—otherwise, no valid binding would be possible. For example, an `int` element cannot be returned as a `long&`.
+
+Because a fold expression **cannot be exited early**, any match must be stored **immediately** in a previously defined data structure. The comparison is therefore performed **only on elements where the types are guaranteed to match**.
+
+Thanks to the previously constructed **mapping between tuple elements and their positions** (via `std::index_sequence`), each element also has a corresponding index. This allows the search to be started from a specific position within the tuple.
+
+```c++
+if (!result && idx >= index && std::equal_to{}(value, tuple_values)) {
+  ...
+}
+```
+
+This checks whether an element matches the search value **and** whether it appears at or **after** the specified start index. Only if both conditions are met and no previous match has been recorded, the result is stored.
+
+Since the matched element might be either `const` or **modifiable**, the storage is handled accordingly:
+
+```c++
+if constexpr (std::is_const_v<std::remove_reference_t<decltype(tuple_values)>>) {
+  result = result_t{std::in_place, const_result_t{tuple_values, idx}};
+} else {
+  result = result_t{std::in_place, non_const_result_t{tuple_values, idx}};
+}
+```
+
+This ensures that the return value reflects **both** the correct reference type (`const` or not) **and** the element’s position within the tuple.
+
+
 
 
 
