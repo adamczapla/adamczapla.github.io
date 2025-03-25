@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+        <loc>https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/</loc>
+        <lastmod>2025-03-25</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
         <loc>https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/</loc>
         <lastmod>2025-02-27</lastmod>
         <priority>0.80</priority>
