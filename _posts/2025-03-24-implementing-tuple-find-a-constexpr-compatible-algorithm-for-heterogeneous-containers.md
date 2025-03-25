@@ -113,7 +113,7 @@ At the beginning of the fold expression, a **type check** is performed:
 }(), ...);
 ```
 
-Only elements whose type **exactly matches** the type of the search value are included in the comparison. This restriction is a direct result of how the function is structured: the return type must be defined **before** the iteration over the tuple begins.
+Only elements whose type **exactly matches** the type of the search value are included in the comparison. This restriction is a direct result of how the function is structured: the return type must be defined **before** the iteration over the tuple begins. Since it is declared based on `value_t`, this is the only type that can be used for a valid reference return. Therefore, the comparison is explicitly limited to elements of this exact type.
 
 Since the function returns a **reference** to the found element, an exact type match is required—otherwise, no valid binding would be possible. For example, an `int` element cannot be returned as a `long&`.
 
