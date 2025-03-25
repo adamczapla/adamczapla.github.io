@@ -3,6 +3,7 @@ title: "Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heter
 categories: [Compile-time programming, Algorithms for Heterogeneous Containers]
 tags: [c++, constexpr, compile-time, lambda, tuple, std-tuple, algorithms, heterogeneous-containers, tuple-for-each, tuple-find, std-apply, fold-expressions, parameter-pack, variadic-template, comma-operator, value-category, static_assert, reference-wrapper, std-variant, std-optional, index-sequence]
 description: "A detailed guide to implementing the constexpr-compatible search algorithm 'tuple_find' for heterogeneous containers using modern C++."
+image: /assets/images/tuple_find.png
 ---
 
 ## Introduction
