@@ -30,7 +30,7 @@ constexpr auto constexpr_func(int val) {
 }
 ```
 
-The compiler produces an error at the line (**`5`**), because the parameter `val` is not `constexpr`. A `consteval` function like `consteval_func()` can only be called with `constexpr` arguments.
+The compiler produces an error on the line (**`5`**), because the parameter `val` is not `constexpr`. A `consteval` function like `consteval_func()` can only be called with `constexpr` arguments.
 
 Logically, this seems unnecessary since the `if (std::is_constant_evaluated())` branch will only execute at compile-time. And even though `val` isn’t `constexpr`, the `constexpr` function would have been invoked with a `constexpr` argument if executed at compile-time. For example:
 
