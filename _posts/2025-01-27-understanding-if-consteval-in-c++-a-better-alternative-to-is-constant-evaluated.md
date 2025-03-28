@@ -9,9 +9,9 @@ image: /assets/images/consteval.png
 
 ## Introduction
 
-When working with `constexpr` and `consteval` in C++, developers may run into some limitations when attempting to evaluate conditions at compile-time. One common scenario is using `std::is_constant_evaluated()` to differentiate between compile-time and runtime code. However, there are cases where this approach fails due to how the compiler performs **static analysis**.
+When working with `constexpr` and `consteval` in C++, developers may run into some limitations when attempting to evaluate conditions at compile-time. One common scenario is using `std::is_constant_evaluated()` to differentiate between compile-time and runtime code. However, there are cases where this approach fails due to how the compiler performs **static analysis** — leading to behavior that might be surprising at first glance.
 
-In this post, we’ll explore how `if consteval` solves these issues, and why it is a better choice compared to `std::is_constant_evaluated()`.
+Let’s take a closer look at what can go wrong and how `if consteval` can help.
 
 ## Why Doesn't This Code Work?
 
