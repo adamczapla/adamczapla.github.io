@@ -823,7 +823,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="539 words"
+  title="538 words"
 >
   <em>2 min</em> read</span>
 
@@ -901,7 +901,7 @@
 </pre></td><td class="rouge-code"><pre><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">val</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">consteval</span> <span class="p">{</span> <span class="k">return</span> <span class="n">constexpr_func</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span> <span class="p">}();</span>
 </pre></td></tr></tbody></table></code></div></div>
 
-<h2 id="why-does-it-still-not-work"><span class="me-2">Why does it still not work?</span><a href="#why-does-it-still-not-work" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h2 id="why-doesnt-it-work-anyway"><span class="me-2">Why doesn’t it work anyway?</span><a href="#why-doesnt-it-work-anyway" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
 <p>The compiler reports an error during <strong>static analysis</strong>, even if the function is not invoked. The error arises because the compiler, during its static analysis phase, checks the code for syntactic and semantic correctness. Since an <code class="language-plaintext highlighter-rouge">if</code> clause is a runtime construct, the compiler does not generate separate code branches for compile-time and runtime during this phase.</p>
 

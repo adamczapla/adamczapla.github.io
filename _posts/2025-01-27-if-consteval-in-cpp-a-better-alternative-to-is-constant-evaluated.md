@@ -38,7 +38,7 @@ Logically, this seems unnecessary since the `if (std::is_constant_evaluated())` 
 constexpr auto val = [] consteval { return constexpr_func(42); }();
 ```
 
-## Why does it still not work?
+## Why doesn't it work anyway?
 
 The compiler reports an error during **static analysis**, even if the function is not invoked. The error arises because the compiler, during its static analysis phase, checks the code for syntactic and semantic correctness. Since an `if` clause is a runtime construct, the compiler does not generate separate code branches for compile-time and runtime during this phase.
 
