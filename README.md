@@ -1,7 +1,6 @@
 # C++ Insights – Straight to the Point
 
 A technical blog focused on modern C++.  
-..
 
 Topics include compile-time programming, metaprogramming, and advanced techniques  
 to write efficient and maintainable C++ code.

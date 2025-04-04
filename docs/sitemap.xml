@@ -32,17 +32,17 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/</loc>
+  <loc>https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/</loc>
   <lastmod>2025-02-27T20:04:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://adamczapla.github.io/posts/understanding-the-static-initialization-order-fiasco-in-c++/</loc>
+  <loc>https://adamczapla.github.io/posts/understanding-the-static-initialization-order-fiasco-in-cpp/</loc>
   <lastmod>2025-02-27T20:04:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://adamczapla.github.io/posts/understanding-if-consteval-in-c++-a-better-alternative-to-is-constant-evaluated/</loc>
+  <loc>https://adamczapla.github.io/posts/if-consteval-in-cpp-a-better-alternative-to-is-constant-evaluated/</loc>
   <lastmod>2025-02-27T20:04:19+00:00</lastmod>
   <priority>0.80</priority>
 </url>
