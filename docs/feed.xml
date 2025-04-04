@@ -4,7 +4,7 @@
   <id>https://adamczapla.github.io/</id>
   <title>Adam Czapla</title>
   <subtitle>Deep dive into modern C++! Explore compile-time programming, metaprogramming, and advanced techniques to write efficient and maintainable C++ code.</subtitle>
-  <updated>2025-04-04T10:23:33+02:00</updated>
+  <updated>2025-04-04T15:45:08+02:00</updated>
   <author>
     <name>Adam Czapla</name>
     <uri>https://adamczapla.github.io/</uri>
@@ -20,8 +20,8 @@
 
   
   <entry>
-    <title>Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</title>
-    <link href="https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/" rel="alternate" type="text/html" title="Implementing &amp;apos;tuple_find&amp;apos; – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2" />
+    <title>A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</title>
+    <link href="https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/" rel="alternate" type="text/html" title="A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find" />
     <published>2025-03-24T00:00:00+01:00</published>
   
     <updated>2025-03-25T13:26:16+01:00</updated>
@@ -46,8 +46,8 @@
 
   
   <entry>
-    <title>Implementing Constexpr-Compatible Algorithms for Heterogeneous Containers – Part 1: 'tuple_for_each'</title>
-    <link href="https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/" rel="alternate" type="text/html" title="Implementing Constexpr-Compatible Algorithms for Heterogeneous Containers – Part 1: &amp;apos;tuple_for_each&amp;apos;" />
+    <title>Constexpr-Compatible Function for std::tuple - Part 1: tuple_for_each</title>
+    <link href="https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/" rel="alternate" type="text/html" title="Constexpr-Compatible Function for std::tuple - Part 1: tuple_for_each" />
     <published>2025-02-26T00:00:00+01:00</published>
   
     <updated>2025-02-28T09:51:08+01:00</updated>
@@ -72,8 +72,8 @@
 
   
   <entry>
-    <title>NTTP Compile-Time Builder Strategy - constexpr Conversion of 'std::vector to std::array'</title>
-    <link href="https://adamczapla.github.io/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/" rel="alternate" type="text/html" title="NTTP Compile-Time Builder Strategy - constexpr Conversion of &amp;apos;std::vector to std::array&amp;apos;" />
+    <title>NTTP Builder Strategy – constexpr Conversion of 'vector to array'</title>
+    <link href="https://adamczapla.github.io/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/" rel="alternate" type="text/html" title="NTTP Builder Strategy – constexpr Conversion of &amp;apos;vector to array&amp;apos;" />
     <published>2025-02-21T00:00:00+01:00</published>
   
     <updated>2025-02-28T13:15:19+01:00</updated>
@@ -98,8 +98,8 @@
 
   
   <entry>
-    <title>Compile-Time Staging Strategy (CTSS): constexpr Conversion of 'int to std::string_view'</title>
-    <link href="https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/" rel="alternate" type="text/html" title="Compile-Time Staging Strategy (CTSS): constexpr Conversion of &amp;apos;int to std::string_view&amp;apos;" />
+    <title>Staging Strategy (CTSS): constexpr Conversion of 'int to string_view'</title>
+    <link href="https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/" rel="alternate" type="text/html" title="Staging Strategy (CTSS): constexpr Conversion of &amp;apos;int to string_view&amp;apos;" />
     <published>2025-02-04T00:00:00+01:00</published>
   
     <updated>2025-02-28T13:26:46+01:00</updated>
@@ -124,8 +124,8 @@
 
   
   <entry>
-    <title>Compile-Time Programming in C++: New Possibilities with C++20 and C++23</title>
-    <link href="https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/" rel="alternate" type="text/html" title="Compile-Time Programming in C++: New Possibilities with C++20 and C++23" />
+    <title>Compile-Time Programming: New Possibilities with C++20 and C++23</title>
+    <link href="https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/" rel="alternate" type="text/html" title="Compile-Time Programming: New Possibilities with C++20 and C++23" />
     <published>2025-01-31T12:00:00+01:00</published>
   
     <updated>2025-02-28T13:33:06+01:00</updated>

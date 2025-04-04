@@ -1,5 +1,5 @@
 ---
-title: "Compile-Time Programming in C++: New Possibilities with C++20 and C++23"
+title: "Compile-Time Programming: New Possibilities with C++20 and C++23"
 date: 31-01-2025 12:00:00 +0100
 categories: [C++, Compile-time programming]
 tags: [c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view, array, literal-type, performance, optimization, conversion]

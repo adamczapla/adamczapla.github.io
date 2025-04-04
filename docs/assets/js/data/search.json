@@ -1,7 +1,7 @@
 [
   
   {
-    "title": "Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2",
+    "title": "A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find",
     "url": "/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/",
     "categories": "Compile-time programming, Algorithms for Heterogeneous Containers",
     "tags": "c++, constexpr, compile-time, lambda, tuple, std-tuple, algorithms, heterogeneous-containers, tuple-for-each, tuple-find, std-apply, fold-expressions, parameter-pack, variadic-template, comma-operator, value-category, static_assert, reference-wrapper, std-variant, std-optional, index-sequence",
@@ -18,7 +18,7 @@
   },
   
   {
-    "title": "Implementing Constexpr-Compatible Algorithms for Heterogeneous Containers – Part 1: 'tuple_for_each'",
+    "title": "Constexpr-Compatible Function for std::tuple - Part 1: tuple_for_each",
     "url": "/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/",
     "categories": "Compile-time programming, Algorithms for Heterogeneous Containers",
     "tags": "c++, constexpr, compile-time, lambda, nttp, tuple, std-tuple, algorithms, heterogeneous-containers, tuple-for-each, std-apply, perfect-forwarding, fold-expressions, parameter-pack, variadic-template, forwarding-reference, comma-operator, if-constexpr, std-invoke, value-category, static_assert",
@@ -35,7 +35,7 @@
   },
   
   {
-    "title": "NTTP Compile-Time Builder Strategy - constexpr Conversion of 'std::vector to std::array'",
+    "title": "NTTP Builder Strategy – constexpr Conversion of 'vector to array'",
     "url": "/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, c++20, constexpr, compile-time, builder, array, vector, literal-type, lambda, conversion, staging, strategy, nttp, constant-expression",
@@ -52,7 +52,7 @@
   },
   
   {
-    "title": "Compile-Time Staging Strategy (CTSS): constexpr Conversion of 'int to std::string_view'",
+    "title": "Staging Strategy (CTSS): constexpr Conversion of 'int to string_view'",
     "url": "/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, c++20, c++23, constexpr, consteval, compile-time, int, string-view, array, literal-type, lambda, conversion, staging, strategy, nttp, ctss, constant-expression",
@@ -69,7 +69,7 @@
   },
   
   {
-    "title": "Compile-Time Programming in C++: New Possibilities with C++20 and C++23",
+    "title": "Compile-Time Programming: New Possibilities with C++20 and C++23",
     "url": "/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view, array, literal-type, performance, optimization, conversion",
@@ -103,7 +103,7 @@
   },
   
   {
-    "title": "Understanding 'if consteval' in C++: A Better Alternative to std::is_constant_evaluated()",
+    "title": "'if consteval' in C++: A Better Alternative to is_constant_evaluated",
     "url": "/posts/understanding-if-consteval-in-c++-a-better-alternative-to-is-constant-evaluated/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, c++23, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions",

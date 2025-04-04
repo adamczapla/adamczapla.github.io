@@ -1,5 +1,5 @@
 ---
-title: "Understanding 'if consteval' in C++: A Better Alternative to std::is_constant_evaluated()"
+title: "'if consteval' in C++: A Better Alternative to is_constant_evaluated"
 date: 27-01-2025 12:00:00 +0100
 categories: [C++, Compile-time programming]
 tags: [c++, c++23, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions]

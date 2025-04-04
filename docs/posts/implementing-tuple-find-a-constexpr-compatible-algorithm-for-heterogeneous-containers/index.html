@@ -30,7 +30,7 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Implementing ‘tuple_find’ – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2" />
+<meta property="og:title" content="A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="A detailed guide to implementing the constexpr-compatible search algorithm ‘tuple_find’ for heterogeneous containers using modern C++." />
 <meta property="og:description" content="A detailed guide to implementing the constexpr-compatible search algorithm ‘tuple_find’ for heterogeneous containers using modern C++." />
@@ -42,14 +42,14 @@
 <meta property="article:published_time" content="2025-03-24T00:00:00+01:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://adamczapla.github.io/assets/images/tuple_find.png" />
-<meta property="twitter:title" content="Implementing ‘tuple_find’ – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2" />
+<meta property="twitter:title" content="A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find" />
 <meta name="twitter:site" content="@" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-25T13:26:16+01:00","datePublished":"2025-03-24T00:00:00+01:00","description":"A detailed guide to implementing the constexpr-compatible search algorithm ‘tuple_find’ for heterogeneous containers using modern C++.","headline":"Implementing ‘tuple_find’ – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2","image":"https://adamczapla.github.io/assets/images/tuple_find.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/"},"url":"https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-25T13:26:16+01:00","datePublished":"2025-03-24T00:00:00+01:00","description":"A detailed guide to implementing the constexpr-compatible search algorithm ‘tuple_find’ for heterogeneous containers using modern C++.","headline":"A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find","image":"https://adamczapla.github.io/assets/images/tuple_find.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/"},"url":"https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</title>
+  <title>A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</title>
 
   <!--
   The Favicons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
@@ -431,7 +431,7 @@
         
           
             
-              <span>Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</span>
+              <span>A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</span>
             
 
           
@@ -806,7 +806,7 @@
 
 <article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</h1>
+    <h1 data-toc-skip>A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</h1>
     
       <p class="post-desc fw-light mb-4">A detailed guide to implementing the constexpr-compatible search algorithm 'tuple_find' for heterogeneous containers using modern C++.</p>
     
@@ -923,7 +923,7 @@
 
   
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</span>
+      <span class="label text-truncate">A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</span>
       <button type="button" class="toc-trigger btn me-1">
         <i class="fa-solid fa-list-ul fa-fw"></i>
       </button>
@@ -936,7 +936,7 @@
 
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</div>
+        <div class="label text-truncate py-2 ms-4">A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</div>
         <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
@@ -1495,21 +1495,21 @@ New values: b = 110, c = 110
 
       
 
-      <a href="https://twitter.com/intent/tweet?text=Implementing%20'tuple_find'%20%E2%80%93%20A%20Constexpr-Compatible%20Algorithm%20for%20Heterogeneous%20Containers%20-%20Part%202%20-%20Adam%20Czapla&url=https%3A%2F%2Fadamczapla.github.io%2Fposts%2Fimplementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+      <a href="https://twitter.com/intent/tweet?text=A%20Constexpr-Compatible%20Algorithm%20for%20std::tuple%20-%20Part%202:%20tuple_find%20-%20Adam%20Czapla&url=https%3A%2F%2Fadamczapla.github.io%2Fposts%2Fimplementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
         <i class="fa-fw fa-brands fa-square-x-twitter"></i>
       </a>
     
 
       
 
-      <a href="https://www.facebook.com/sharer/sharer.php?title=Implementing%20'tuple_find'%20%E2%80%93%20A%20Constexpr-Compatible%20Algorithm%20for%20Heterogeneous%20Containers%20-%20Part%202%20-%20Adam%20Czapla&u=https%3A%2F%2Fadamczapla.github.io%2Fposts%2Fimplementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?title=A%20Constexpr-Compatible%20Algorithm%20for%20std::tuple%20-%20Part%202:%20tuple_find%20-%20Adam%20Czapla&u=https%3A%2F%2Fadamczapla.github.io%2Fposts%2Fimplementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
         <i class="fa-fw fab fa-facebook-square"></i>
       </a>
     
 
       
 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fadamczapla.github.io%2Fposts%2Fimplementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers%2F&text=Implementing%20'tuple_find'%20%E2%80%93%20A%20Constexpr-Compatible%20Algorithm%20for%20Heterogeneous%20Containers%20-%20Part%202%20-%20Adam%20Czapla" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fadamczapla.github.io%2Fposts%2Fimplementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers%2F&text=A%20Constexpr-Compatible%20Algorithm%20for%20std::tuple%20-%20Part%202:%20tuple_find%20-%20Adam%20Czapla" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
         <i class="fa-fw fab fa-telegram"></i>
       </a>
     
@@ -1564,14 +1564,14 @@ New values: b = 110, c = 110
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/understanding-if-consteval-in-c++-a-better-alternative-to-is-constant-evaluated/">Understanding 'if consteval' in C++: A Better Alternative to std::is_constant_evaluated()</a>
+          <a href="/posts/understanding-if-consteval-in-c++-a-better-alternative-to-is-constant-evaluated/">'if consteval' in C++: A Better Alternative to is_constant_evaluated</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/">Implementing 'tuple_find' – A Constexpr-Compatible Algorithm for Heterogeneous Containers - Part 2</a>
+          <a href="/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/">A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find</a>
         </li>
       
         
@@ -1585,14 +1585,14 @@ New values: b = 110, c = 110
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/">Compile-Time Programming in C++: New Possibilities with C++20 and C++23</a>
+          <a href="/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/">Compile-Time Programming: New Possibilities with C++20 and C++23</a>
         </li>
       
         
         
         
         <li class="text-truncate lh-lg">
-          <a href="/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/">Compile-Time Staging Strategy (CTSS): constexpr Conversion of 'int to std::string_view'</a>
+          <a href="/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/">Staging Strategy (CTSS): constexpr Conversion of 'int to string_view'</a>
         </li>
       
     </ul>
@@ -2473,7 +2473,7 @@ New values: b = 110, c = 110
   Feb 21, 2025
 </time>
 
-              <h4 class="pt-0 my-2">NTTP Compile-Time Builder Strategy - constexpr Conversion of 'std::vector to std::array'</h4>
+              <h4 class="pt-0 my-2">NTTP Builder Strategy – constexpr Conversion of 'vector to array'</h4>
               <div class="text-muted">
                 <p>A deep dive into the &#39;NTTP Compile-Time Builder Strategy&#39; for constexpr conversion of &#39;std::vector&#39; to &#39;std::array&#39; in C++.</p>
               </div>
@@ -2501,7 +2501,7 @@ New values: b = 110, c = 110
   Feb  4, 2025
 </time>
 
-              <h4 class="pt-0 my-2">Compile-Time Staging Strategy (CTSS): constexpr Conversion of 'int to std::string_view'</h4>
+              <h4 class="pt-0 my-2">Staging Strategy (CTSS): constexpr Conversion of 'int to string_view'</h4>
               <div class="text-muted">
                 <p>A detailed introduction to the Compile-Time Staging Strategy (CTSS) for converting an int to a std::string_view at compile time using C++20 and C++23.</p>
               </div>
@@ -2529,7 +2529,7 @@ New values: b = 110, c = 110
   Jan 31, 2025
 </time>
 
-              <h4 class="pt-0 my-2">Compile-Time Programming in C++: New Possibilities with C++20 and C++23</h4>
+              <h4 class="pt-0 my-2">Compile-Time Programming: New Possibilities with C++20 and C++23</h4>
               <div class="text-muted">
                 <p>A deep dive into compile-time programming in C++20 and C++23, focusing on efficient &#39;std::string&#39; to &#39;std::string_view&#39; conversion.</p>
               </div>
@@ -2556,7 +2556,7 @@ New values: b = 110, c = 110
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>Implementing Constexpr-Compatible Algorithms for Heterogeneous Containers – Part 1: 'tuple_for_each'</p>
+      <p>Constexpr-Compatible Function for std::tuple - Part 1: tuple_for_each</p>
     </a>
   
 
