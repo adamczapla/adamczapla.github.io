@@ -70,7 +70,7 @@
   
   {
     "title": "Compile-Time Programming: New Possibilities with C++20 and C++23",
-    "url": "/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/",
+    "url": "/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, c++20, c++23, constexpr, consteval, compile-time, prvalue, lambda, string, string-view, array, literal-type, performance, optimization, conversion",
     "date": "2025-01-31 12:00:00 +0100",
@@ -87,7 +87,7 @@
   
   {
     "title": "Understanding the 'Static Initialization Order Fiasco' in C++",
-    "url": "/posts/understanding-the-static-initialization-order-fiasco-in-c++/",
+    "url": "/posts/understanding-the-static-initialization-order-fiasco-in-cpp/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, static-initialization, initialization-order, constexpr, constinit, global-variables, static-variables, compile-time, linker, zero-initialization",
     "date": "2025-01-27 12:00:00 +0100",
@@ -104,7 +104,7 @@
   
   {
     "title": "'if consteval' in C++: A Better Alternative to is_constant_evaluated",
-    "url": "/posts/understanding-if-consteval-in-c++-a-better-alternative-to-is-constant-evaluated/",
+    "url": "/posts/if-consteval-in-cpp-a-better-alternative-to-is-constant-evaluated/",
     "categories": "C++, Compile-time programming",
     "tags": "c++, c++23, if-consteval, is-constant-evaluated, constexpr, consteval, compile-time, static-analysis, consteval-functions",
     "date": "2025-01-27 12:00:00 +0100",

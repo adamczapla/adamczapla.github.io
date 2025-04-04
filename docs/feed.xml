@@ -4,7 +4,7 @@
   <id>https://adamczapla.github.io/</id>
   <title>Adam Czapla</title>
   <subtitle>Deep dive into modern C++! Explore compile-time programming, metaprogramming, and advanced techniques to write efficient and maintainable C++ code.</subtitle>
-  <updated>2025-04-04T15:45:08+02:00</updated>
+  <updated>2025-04-04T16:02:56+02:00</updated>
   <author>
     <name>Adam Czapla</name>
     <uri>https://adamczapla.github.io/</uri>
@@ -24,7 +24,7 @@
     <link href="https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/" rel="alternate" type="text/html" title="A Constexpr-Compatible Algorithm for std::tuple - Part 2: tuple_find" />
     <published>2025-03-24T00:00:00+01:00</published>
   
-    <updated>2025-03-25T13:26:16+01:00</updated>
+    <updated>2025-04-04T15:48:22+02:00</updated>
   
     <id>https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/</id>
     <content type="text/html" src="https://adamczapla.github.io/posts/implementing-tuple-find-a-constexpr-compatible-algorithm-for-heterogeneous-containers/" />
@@ -50,7 +50,7 @@
     <link href="https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/" rel="alternate" type="text/html" title="Constexpr-Compatible Function for std::tuple - Part 1: tuple_for_each" />
     <published>2025-02-26T00:00:00+01:00</published>
   
-    <updated>2025-02-28T09:51:08+01:00</updated>
+    <updated>2025-04-04T15:48:22+02:00</updated>
   
     <id>https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/</id>
     <content type="text/html" src="https://adamczapla.github.io/posts/implementing-constexpr-compatible-algorithms-for-heterogeneous-containers-tuple-for-each/" />
@@ -76,7 +76,7 @@
     <link href="https://adamczapla.github.io/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/" rel="alternate" type="text/html" title="NTTP Builder Strategy – constexpr Conversion of &amp;apos;vector to array&amp;apos;" />
     <published>2025-02-21T00:00:00+01:00</published>
   
-    <updated>2025-02-28T13:15:19+01:00</updated>
+    <updated>2025-04-04T15:48:22+02:00</updated>
   
     <id>https://adamczapla.github.io/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/</id>
     <content type="text/html" src="https://adamczapla.github.io/posts/nttp-compile-time-builder-strategy-constexpr-conversion-of-vector-to-array/" />
@@ -102,7 +102,7 @@
     <link href="https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/" rel="alternate" type="text/html" title="Staging Strategy (CTSS): constexpr Conversion of &amp;apos;int to string_view&amp;apos;" />
     <published>2025-02-04T00:00:00+01:00</published>
   
-    <updated>2025-02-28T13:26:46+01:00</updated>
+    <updated>2025-04-04T15:48:22+02:00</updated>
   
     <id>https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/</id>
     <content type="text/html" src="https://adamczapla.github.io/posts/compile-time-staging-strategy-ctss-constexpr-conversion-of-int-to-string-view/" />
@@ -125,13 +125,13 @@
   
   <entry>
     <title>Compile-Time Programming: New Possibilities with C++20 and C++23</title>
-    <link href="https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/" rel="alternate" type="text/html" title="Compile-Time Programming: New Possibilities with C++20 and C++23" />
+    <link href="https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/" rel="alternate" type="text/html" title="Compile-Time Programming: New Possibilities with C++20 and C++23" />
     <published>2025-01-31T12:00:00+01:00</published>
   
-    <updated>2025-02-28T13:33:06+01:00</updated>
+    <updated>2025-01-31T12:00:00+01:00</updated>
   
-    <id>https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/</id>
-    <content type="text/html" src="https://adamczapla.github.io/posts/compile-time-programming-in-c++new-possibilities-with-c++20-and-c++23/" />
+    <id>https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/</id>
+    <content type="text/html" src="https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/" />
     <author>
       <name>Adam Czapla</name>
     </author>
