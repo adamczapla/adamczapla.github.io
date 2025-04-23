@@ -4,7 +4,7 @@
   <id>https://adamczapla.github.io/</id>
   <title>Adam Czapla</title>
   <subtitle>Deep dive into modern C++! Explore compile-time programming, metaprogramming, and advanced techniques to write efficient and maintainable C++ code.</subtitle>
-  <updated>2025-04-04T18:09:35+02:00</updated>
+  <updated>2025-04-23T20:30:49+02:00</updated>
   <author>
     <name>Adam Czapla</name>
     <uri>https://adamczapla.github.io/</uri>
@@ -17,6 +17,32 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Path conflict detection in C++ using a trie-based algorithm</title>
+    <link href="https://adamczapla.github.io/posts/path-conflict-detection-in-cpp-using-a-trie-based-algorithm/" rel="alternate" type="text/html" title="Path conflict detection in C++ using a trie-based algorithm" />
+    <published>2025-04-23T00:00:00+02:00</published>
+  
+    <updated>2025-04-23T00:00:00+02:00</updated>
+  
+    <id>https://adamczapla.github.io/posts/path-conflict-detection-in-cpp-using-a-trie-based-algorithm/</id>
+    <content type="text/html" src="https://adamczapla.github.io/posts/path-conflict-detection-in-cpp-using-a-trie-based-algorithm/" />
+    <author>
+      <name>Adam Czapla</name>
+    </author>
+
+  
+    
+    <category term="Filesystem" />
+    
+    <category term="Tree-Based Algorithms" />
+    
+  
+
+  <summary>A concise explanation of &amp;#39;has_conflict&amp;#39;, a trie-based C++ algorithm for detecting overlapping file system paths during configuration validation.</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,32 +145,6 @@
   
 
   <summary>A detailed introduction to the Compile-Time Staging Strategy (CTSS) for converting an int to a std::string_view at compile time using C++20 and C++23.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Compile-Time Programming: New Possibilities with C++20 and C++23</title>
-    <link href="https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/" rel="alternate" type="text/html" title="Compile-Time Programming: New Possibilities with C++20 and C++23" />
-    <published>2025-01-31T12:00:00+01:00</published>
-  
-    <updated>2025-01-31T12:00:00+01:00</updated>
-  
-    <id>https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/</id>
-    <content type="text/html" src="https://adamczapla.github.io/posts/compile-time-programming-new-possibilities-with-cpp20-and-cpp23/" />
-    <author>
-      <name>Adam Czapla</name>
-    </author>
-
-  
-    
-    <category term="C++" />
-    
-    <category term="Compile-time programming" />
-    
-  
-
-  <summary>A deep dive into compile-time programming in C++20 and C++23, focusing on efficient &amp;#39;std::string&amp;#39; to &amp;#39;std::string_view&amp;#39; conversion.</summary>
 
   </entry>
 
