@@ -3,7 +3,7 @@ title: "Path conflict detection in C++ using a trie-based algorithm"
 categories: [Filesystem, Tree-Based Algorithms]
 tags: [c++, c++17, trie, tree-algorithm, std-filesystem, path, conflict-detection, configuration-validation, unordered_map, lexically_normal, json, has_conflict]
 description: "A concise explanation of 'has_conflict', a trie-based C++ algorithm for detecting overlapping file system paths during configuration validation."
-image: /assets/images/tuple_find.png
+image: /assets/images/trie-structure.png
 ---
 
 ## Introduction
