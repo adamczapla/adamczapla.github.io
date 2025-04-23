@@ -61,11 +61,7 @@ a
 b
 ```
 
-This is important because the conflict check is based exactly on this structure: **each of these components is handled and stored separately in the trie**. This is the only way to reliably detect whether a path already exists or overlaps with another one
-.
-
-In the next section, I will show how these conflicts are detected using concrete path examples.
-
+This is important because the conflict check is based exactly on this structure: **each of these components is handled and stored separately in the trie**. This is the only way to reliably detect whether a path already exists or overlaps with another one.
 
 ## Conflict Detection Examples
 

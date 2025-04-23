@@ -4,7 +4,7 @@
   <id>https://adamczapla.github.io/</id>
   <title>Adam Czapla</title>
   <subtitle>Deep dive into modern C++! Explore compile-time programming, metaprogramming, and advanced techniques to write efficient and maintainable C++ code.</subtitle>
-  <updated>2025-04-23T20:48:25+02:00</updated>
+  <updated>2025-04-23T21:34:29+02:00</updated>
   <author>
     <name>Adam Czapla</name>
     <uri>https://adamczapla.github.io/</uri>
@@ -24,7 +24,7 @@
     <link href="https://adamczapla.github.io/posts/path-conflict-detection-in-cpp-using-a-trie-based-algorithm/" rel="alternate" type="text/html" title="Path conflict detection in C++ using a trie-based algorithm" />
     <published>2025-04-23T00:00:00+02:00</published>
   
-    <updated>2025-04-23T00:00:00+02:00</updated>
+    <updated>2025-04-23T20:49:38+02:00</updated>
   
     <id>https://adamczapla.github.io/posts/path-conflict-detection-in-cpp-using-a-trie-based-algorithm/</id>
     <content type="text/html" src="https://adamczapla.github.io/posts/path-conflict-detection-in-cpp-using-a-trie-based-algorithm/" />
